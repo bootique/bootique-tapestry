@@ -14,11 +14,11 @@ Add the module to your Bootique app:
 </dependency>
 ```
 
-Configure Tapestry module in your app ```.yml``` (por via any other Bootique-compatible mechanism) :
+Configure Tapestry module in your app ```.yml``` (or via any other Bootique-compatible mechanism). E.g.:
 ```
 tapestry:
-  name: myapp # The name of the T5 app module. Default is "tapestry"
-  appPackage: com.foo # default base package for the Tapestry app
+  name: myapp          # The name of the T5 app module. Default is "tapestry".
+  appPackage: com.foo  # default base package for the Tapestry app
 ```
 
 Tapestry app can use its own injection and modules. Additionally services defined in Bootique are available via Tapestry injection.
