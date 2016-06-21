@@ -15,7 +15,7 @@ Add the module to your Bootique app:
 ```
 
 Configure Tapestry module in your app ```.yml``` (or via any other Bootique-compatible mechanism). E.g.:
-```
+```yml
 tapestry:
   name: myapp          # The name of the T5 app module. Default is "tapestry".
   appPackage: com.foo  # default base package for the Tapestry app
