@@ -37,6 +37,16 @@ public class TapestryModuleIT {
         assertHtml("/page2", "I am wrapped", "[I am page2 body]");
     }
 
+    @Test
+    public void testPageRender_T5_Injection() {
+        app.newRuntime().configurator(bootique -> bootique.module(JettyModule.class).module(TapestryModule.class))
+                .property("bq.tapestry.appPackage", "com.nhl.bootique.tapestry.testapp2")
+                .property("bq.tapestry.name", "testapp2")
+                .startServer();
+
+        assertHtml("/", "Index", "[III]");
+    }
+
     private void assertHtml(String uri, String expectedTitle, String expectedBody) {
         Response r = BASE_TARGET.path(uri).request(MediaType.TEXT_HTML).get();
         assertEquals(200, r.getStatus());
