@@ -12,7 +12,13 @@ import org.apache.tapestry5.services.ServletApplicationInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -94,7 +100,11 @@ public class BQTapestryFilter implements Filter {
     @Override
     public final void destroy() {
 
-        registry.shutdown();
+        // if startup has failed, registry will be null
+        if(registry != null) {
+            registry.shutdown();
+        }
+
         context.removeAttribute(TapestryFilter.REGISTRY_CONTEXT_NAME);
 
         registry = null;

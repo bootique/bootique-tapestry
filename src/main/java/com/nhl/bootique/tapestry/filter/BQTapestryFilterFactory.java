@@ -2,12 +2,14 @@ package com.nhl.bootique.tapestry.filter;
 
 import com.nhl.bootique.jetty.MappedFilter;
 import org.apache.tapestry5.SymbolConstants;
+import org.apache.tapestry5.internal.InternalConstants;
 import org.apache.tapestry5.ioc.internal.services.MapSymbolProvider;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class BQTapestryFilterFactory {
 
@@ -22,6 +24,7 @@ public class BQTapestryFilterFactory {
     protected String executionModes;
     protected String supportedLocales;
     protected String charset;
+    protected String appPackage;
 
     public BQTapestryFilterFactory() {
         this.urlPattern = "/*";
@@ -51,6 +54,10 @@ public class BQTapestryFilterFactory {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setAppPackage(String appPackage) {
+        this.appPackage = appPackage;
     }
 
     public void setFilterOrder(int filterOrder) {
@@ -83,6 +90,8 @@ public class BQTapestryFilterFactory {
 
         // compression should be configured at the Jetty level
         params.put(SymbolConstants.GZIP_COMPRESSION_ENABLED, "false");
+
+        params.put(InternalConstants.TAPESTRY_APP_PACKAGE_PARAM, Objects.requireNonNull(appPackage));
 
         if(supportedLocales != null) {
             params.put(SymbolConstants.SUPPORTED_LOCALES, supportedLocales);
