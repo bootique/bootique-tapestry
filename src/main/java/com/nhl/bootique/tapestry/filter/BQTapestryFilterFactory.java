@@ -1,8 +1,12 @@
 package com.nhl.bootique.tapestry.filter;
 
+import com.google.inject.Injector;
 import com.nhl.bootique.jetty.MappedFilter;
+import com.nhl.bootique.tapestry.di.GuiceTapestryModule;
+import com.nhl.bootique.tapestry.di.InjectorModuleDef;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.internal.InternalConstants;
+import org.apache.tapestry5.ioc.def.ModuleDef;
 import org.apache.tapestry5.ioc.internal.services.MapSymbolProvider;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
 
@@ -68,15 +72,20 @@ public class BQTapestryFilterFactory {
         this.urlPattern = urlPattern;
     }
 
-    public MappedFilter createTapestryFilter() {
-
-
+    public MappedFilter createTapestryFilter(Injector injector) {
         SymbolProvider symbolProvider = createSymbolProvider();
-
-        // TODO: support configuring extra tapestry modules...
-        BQTapestryFilter filter = new BQTapestryFilter(name, symbolProvider, new Class[0]);
-
+        BQTapestryFilter filter = new BQTapestryFilter(name, symbolProvider, extraModules(), extraModuleDefs(injector));
         return new MappedFilter(filter, Collections.singleton(urlPattern), name, filterOrder);
+    }
+
+    protected Class[] extraModules() {
+        return new Class[]{GuiceTapestryModule.class};
+    }
+
+    protected ModuleDef[] extraModuleDefs(Injector injector) {
+        ModuleDef guiceBridge = new InjectorModuleDef(injector);
+
+        return new ModuleDef[]{guiceBridge};
     }
 
     protected SymbolProvider createSymbolProvider() {
@@ -93,7 +102,7 @@ public class BQTapestryFilterFactory {
 
         params.put(InternalConstants.TAPESTRY_APP_PACKAGE_PARAM, Objects.requireNonNull(appPackage));
 
-        if(supportedLocales != null) {
+        if (supportedLocales != null) {
             params.put(SymbolConstants.SUPPORTED_LOCALES, supportedLocales);
         }
 

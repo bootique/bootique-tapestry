@@ -1,6 +1,7 @@
 package com.nhl.bootique.tapestry;
 
 import com.google.inject.Binder;
+import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
@@ -20,7 +21,7 @@ public class TapestryModule extends ConfigModule {
     @Singleton
     @Provides
     @TapestryFilter
-    MappedFilter createTapestryFilter(ConfigurationFactory configurationFactory) {
-        return configurationFactory.config(BQTapestryFilterFactory.class, configPrefix).createTapestryFilter();
+    MappedFilter createTapestryFilter(ConfigurationFactory configurationFactory, Injector injector) {
+        return configurationFactory.config(BQTapestryFilterFactory.class, configPrefix).createTapestryFilter(injector);
     }
 }

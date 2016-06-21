@@ -2,6 +2,7 @@ package com.nhl.bootique.tapestry;
 
 import com.nhl.bootique.jetty.JettyModule;
 import com.nhl.bootique.jetty.test.junit.JettyTestFactory;
+import com.nhl.bootique.tapestry.testapp2.bq.TestApp2BootiqueModule;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -47,11 +48,44 @@ public class TapestryModuleIT {
         assertHtml("/", "Index", "[III]");
     }
 
+    @Test
+    public void testPageRender_T5_BQInjection() {
+        app.newRuntime().configurator(bootique -> bootique
+                .module(JettyModule.class)
+                .module(TapestryModule.class)
+                .module(TestApp2BootiqueModule.class))
+                .property("bq.tapestry.appPackage", "com.nhl.bootique.tapestry.testapp2")
+                .property("bq.tapestry.name", "testapp2")
+                .startServer();
+
+        assertHtml("/bqservices", "BQServices", "{III}");
+    }
+
+    @Test
+    public void testPageRender_T5_BQInjection_Annotations() {
+        app.newRuntime().configurator(bootique -> bootique
+                .module(JettyModule.class)
+                .module(TapestryModule.class)
+                .module(TestApp2BootiqueModule.class))
+                .property("bq.tapestry.appPackage", "com.nhl.bootique.tapestry.testapp2")
+                .property("bq.tapestry.name", "testapp2")
+                .startServer("testarg", "testarg2");
+
+        assertHtml("/bqannotatedservices", "BQAnnotatedServices", "--server_testarg_testarg2");
+    }
+
     private void assertHtml(String uri, String expectedTitle, String expectedBody) {
         Response r = BASE_TARGET.path(uri).request(MediaType.TEXT_HTML).get();
         assertEquals(200, r.getStatus());
 
         String html = r.readEntity(String.class);
+
+        // adding a small delay after reading the response. Otherwise container may start shutdown
+        // when T5 request is still in progress, resulting in stack traces in the logs.
+        try {
+            Thread.sleep(20);
+        } catch (InterruptedException e) {
+        }
 
         assertTrue(html.startsWith("<!DOCTYPE html><html"));
         assertTrue(html.endsWith("</html>"));

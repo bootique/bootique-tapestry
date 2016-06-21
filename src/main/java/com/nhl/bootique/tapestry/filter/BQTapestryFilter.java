@@ -6,6 +6,7 @@ import org.apache.tapestry5.internal.SingleKeySymbolProvider;
 import org.apache.tapestry5.internal.TapestryAppInitializer;
 import org.apache.tapestry5.internal.util.DelegatingSymbolProvider;
 import org.apache.tapestry5.ioc.Registry;
+import org.apache.tapestry5.ioc.def.ModuleDef;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
 import org.apache.tapestry5.services.HttpServletRequestHandler;
 import org.apache.tapestry5.services.ServletApplicationInitializer;
@@ -35,15 +36,17 @@ public class BQTapestryFilter implements Filter {
     private SymbolProvider baseSymbolProvider;
     private String name;
     private Class[] extraModules;
+    private ModuleDef[] extraModuleDefs;
 
     private ServletContext context;
     private Registry registry;
     private HttpServletRequestHandler handler;
 
-    public BQTapestryFilter(String name, SymbolProvider baseSymbolProvider, Class[] extraModules) {
+    public BQTapestryFilter(String name, SymbolProvider baseSymbolProvider, Class[] extraModules, ModuleDef[] extraModuleDefs) {
         this.name = name;
         this.baseSymbolProvider = baseSymbolProvider;
         this.extraModules = extraModules;
+        this.extraModuleDefs = extraModuleDefs;
     }
 
     protected SymbolProvider createSymbolProvider(ServletContext context) {
@@ -65,6 +68,7 @@ public class BQTapestryFilter implements Filter {
         TapestryAppInitializer appInitializer = new TapestryAppInitializer(LOGGER, contextualSymbolProvider, name, executionMode);
 
         appInitializer.addModules(extraModules);
+        appInitializer.addModules(extraModuleDefs);
 
         this.registry = appInitializer.createRegistry();
         this.context.setAttribute(TapestryFilter.REGISTRY_CONTEXT_NAME, registry);
@@ -101,7 +105,7 @@ public class BQTapestryFilter implements Filter {
     public final void destroy() {
 
         // if startup has failed, registry will be null
-        if(registry != null) {
+        if (registry != null) {
             registry.shutdown();
         }
 
