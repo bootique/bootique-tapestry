@@ -1,4 +1,4 @@
-package com.nhl.bootique.tapestry.boot;
+package com.nhl.bootique.tapestry.filter;
 
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.TapestryFilter;
@@ -26,7 +26,7 @@ public class BQTapestryFilter implements Filter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BQTapestryFilter.class);
 
-    private SymbolProvider symbolProvider;
+    private SymbolProvider baseSymbolProvider;
     private String name;
     private Class[] extraModules;
 
@@ -34,16 +34,16 @@ public class BQTapestryFilter implements Filter {
     private Registry registry;
     private HttpServletRequestHandler handler;
 
-    public BQTapestryFilter(String name, SymbolProvider symbolProvider, Class[] extraModules) {
+    public BQTapestryFilter(String name, SymbolProvider baseSymbolProvider, Class[] extraModules) {
         this.name = name;
-        this.symbolProvider = symbolProvider;
+        this.baseSymbolProvider = baseSymbolProvider;
         this.extraModules = extraModules;
     }
 
     protected SymbolProvider createSymbolProvider(ServletContext context) {
         // merge upstream provider with defaults from ServletContext
         return new DelegatingSymbolProvider(
-                symbolProvider,
+                baseSymbolProvider,
                 new SingleKeySymbolProvider(SymbolConstants.CONTEXT_PATH, context.getContextPath())
         );
     }

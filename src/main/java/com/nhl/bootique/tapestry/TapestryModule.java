@@ -6,11 +6,10 @@ import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import com.nhl.bootique.ConfigModule;
 import com.nhl.bootique.config.ConfigurationFactory;
-import com.nhl.bootique.env.Environment;
 import com.nhl.bootique.jetty.JettyModule;
 import com.nhl.bootique.jetty.MappedFilter;
 import com.nhl.bootique.jetty.MappedServlet;
-import com.nhl.bootique.tapestry.boot.BQTapestryFilterFactory;
+import com.nhl.bootique.tapestry.filter.BQTapestryFilterFactory;
 
 public class TapestryModule extends ConfigModule {
 
@@ -22,7 +21,7 @@ public class TapestryModule extends ConfigModule {
     @Singleton
     @Provides
     @TapestryFilter
-    public MappedFilter createTapestryFilter(ConfigurationFactory configurationFactory, Environment environment) {
-        return configurationFactory.config(BQTapestryFilterFactory.class, configPrefix).createTapestryFilter(environment);
+    public MappedFilter createTapestryFilter(ConfigurationFactory configurationFactory) {
+        return configurationFactory.config(BQTapestryFilterFactory.class, configPrefix).createTapestryFilter();
     }
 }
