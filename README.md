@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/nhl/bootique-tapestry.svg)](https://travis-ci.org/nhl/bootique-tapestry)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.nhl.bootique.tapestry/bootique-tapestry/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.nhl.bootique.tapestry/bootique-tapestry/)
 
 # bootique-tapestry
 Provides [Apache Tapestry](http://tapestry.apache.org/) integration with [Bootique](http://bootique.io).
