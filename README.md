@@ -9,9 +9,21 @@ Provides [Apache Tapestry](http://tapestry.apache.org/) integration with [Bootiq
 Add the module to your Bootique app:
 
 ```xml
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>com.nhl.bootique.bom</groupId>
+            <artifactId>bootique-bom</artifactId>
+            <version>0.18</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+
 <dependency>
-	<groupId>com.nhl.bootique.tapestry</groupId>
-	<artifactId>bootique-tapestry</artifactId>
+    <groupId>com.nhl.bootique.tapestry</groupId>
+    <artifactId>bootique-tapestry</artifactId>
 </dependency>
 ```
 
