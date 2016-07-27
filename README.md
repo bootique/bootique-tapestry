@@ -20,7 +20,7 @@ Add the module to your Bootique app:
         </dependency>
     </dependencies>
 </dependencyManagement>
-
+...
 <dependency>
     <groupId>com.nhl.bootique.tapestry</groupId>
     <artifactId>bootique-tapestry</artifactId>
