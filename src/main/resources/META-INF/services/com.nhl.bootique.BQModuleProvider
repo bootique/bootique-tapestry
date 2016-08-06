@@ -1,1 +1,1 @@
-com.nhl.bootique.tapestry.TapestryModuleProvider
+io.bootique.tapestry.TapestryModuleProvider

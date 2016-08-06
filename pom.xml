@@ -3,12 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.nhl.bootique.parent</groupId>
+		<groupId>io.bootique.parent</groupId>
 		<artifactId>bootique-parent</artifactId>
-		<version>0.10</version>
+		<version>0.12</version>
 	</parent>
 
-	<groupId>com.nhl.bootique.tapestry</groupId>
+	<groupId>io.bootique.tapestry</groupId>
 	<artifactId>bootique-tapestry</artifactId>
 	<version>0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -19,15 +19,15 @@
 	</description>
 
 	<properties>
-		<bootique-version>0.18</bootique-version>
+		<bootique-version>0.19-SNAPSHOT</bootique-version>
 		<bootique-jetty-version>0.16</bootique-jetty-version>
 		<jersey-version>2.21</jersey-version>
 		<tapestry-version>5.4.1</tapestry-version>
 	</properties>
 
 	<scm>
-		<developerConnection>scm:git:ssh://git@github.com/nhl/bootique-tapestry</developerConnection>
-		<url>https://github.com/nhl/bootique-tapestry</url>
+		<developerConnection>scm:git:ssh://git@github.com/bootique/bootique-tapestry</developerConnection>
+		<url>https://github.com/bootique/bootique-tapestry</url>
 		<tag>HEAD</tag>
 	</scm>
 

@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/nhl/bootique-tapestry.svg)](https://travis-ci.org/nhl/bootique-tapestry)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.nhl.bootique.tapestry/bootique-tapestry/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.nhl.bootique.tapestry/bootique-tapestry/)
+[![Build Status](https://travis-ci.org/bootique/bootique-tapestry.svg)](https://travis-ci.org/bootique/bootique-tapestry)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.bootique.tapestry/bootique-tapestry/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.bootique.tapestry/bootique-tapestry/)
 
 # bootique-tapestry
 Provides [Apache Tapestry](http://tapestry.apache.org/) integration with [Bootique](http://bootique.io).
@@ -12,9 +12,9 @@ Add the module to your Bootique app:
 <dependencyManagement>
     <dependencies>
         <dependency>
-            <groupId>com.nhl.bootique.bom</groupId>
+            <groupId>io.bootique.bom</groupId>
             <artifactId>bootique-bom</artifactId>
-            <version>0.18</version>
+            <version>0.19</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -22,7 +22,7 @@ Add the module to your Bootique app:
 </dependencyManagement>
 ...
 <dependency>
-    <groupId>com.nhl.bootique.tapestry</groupId>
+    <groupId>io.bootique.tapestry</groupId>
     <artifactId>bootique-tapestry</artifactId>
 </dependency>
 ```
@@ -34,4 +34,5 @@ tapestry:
   appPackage: com.foo  # default base package for the Tapestry app
 ```
 
-Tapestry app can use its own injection and modules. Additionally services defined in Bootique are available via Tapestry injection.
+Tapestry app can use its own injection and modules. Additionally services defined in Bootique are available via Tapestry 
+injection.
