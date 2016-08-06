@@ -1,7 +1,6 @@
 package io.bootique.tapestry;
 
-import com.nhl.bootique.test.junit.BQModuleProviderChecker;
-import io.bootique.tapestry.TapestryModuleProvider;
+import io.bootique.test.junit.BQModuleProviderChecker;
 import org.junit.Test;
 
 public class TapestryModuleProviderTest {

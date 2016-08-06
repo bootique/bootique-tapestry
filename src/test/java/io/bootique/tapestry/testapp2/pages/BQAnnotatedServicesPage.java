@@ -1,6 +1,6 @@
 package io.bootique.tapestry.testapp2.pages;
 
-import com.nhl.bootique.annotation.Args;
+import io.bootique.annotation.Args;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import java.util.Arrays;

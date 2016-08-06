@@ -1,7 +1,7 @@
 package io.bootique.tapestry.filter;
 
 import com.google.inject.Injector;
-import com.nhl.bootique.jetty.MappedFilter;
+import io.bootique.jetty.MappedFilter;
 import io.bootique.tapestry.di.GuiceTapestryModule;
 import io.bootique.tapestry.di.InjectorModuleDef;
 import org.apache.tapestry5.SymbolConstants;

@@ -1,7 +1,7 @@
 package io.bootique.tapestry;
 
-import com.nhl.bootique.jetty.JettyModule;
 import com.nhl.bootique.jetty.test.junit.JettyTestFactory;
+import io.bootique.jetty.JettyModule;
 import io.bootique.tapestry.testapp2.bq.TestApp2BootiqueModule;
 import org.junit.Rule;
 import org.junit.Test;
