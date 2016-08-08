@@ -10,7 +10,7 @@
 
 	<groupId>io.bootique.tapestry</groupId>
 	<artifactId>bootique-tapestry</artifactId>
-	<version>0.2</version>
+	<version>0.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>bootique-tapestry: Apache Tapestry Integration for Bootique</name>
@@ -28,7 +28,7 @@
 	<scm>
         <developerConnection>scm:git:ssh://git@github.com/bootique/bootique-tapestry</developerConnection>
         <url>https://github.com/bootique/bootique-tapestry</url>
-        <tag>bootique-tapestry-0.2</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>
