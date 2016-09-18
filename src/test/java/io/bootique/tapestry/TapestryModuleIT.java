@@ -21,26 +21,31 @@ public class TapestryModuleIT {
     @Rule
     public JettyTestFactory app = new JettyTestFactory();
 
-
     @Test
     public void testPageRender_Index() {
-        app.newRuntime().configurator(bootique -> bootique.module(JettyModule.class).module(TapestryModule.class)
-        ).property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp1").startServer();
+        app.app()
+                .module(JettyModule.class)
+                .module(TapestryModule.class)
+                .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp1")
+                .startServer();
 
         assertHtml("/", "Index", "[xyz]");
     }
 
     @Test
     public void testPageRender_Page2() {
-        app.newRuntime().configurator(bootique -> bootique.module(JettyModule.class).module(TapestryModule.class)
-        ).property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp1").startServer();
+        app.app()
+                .modules(JettyModule.class, TapestryModule.class)
+                .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp1")
+                .startServer();
 
         assertHtml("/page2", "I am wrapped", "[I am page2 body]");
     }
 
     @Test
     public void testPageRender_T5_Injection() {
-        app.newRuntime().configurator(bootique -> bootique.module(JettyModule.class).module(TapestryModule.class))
+        app.app()
+                .modules(JettyModule.class, TapestryModule.class)
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp2")
                 .property("bq.tapestry.name", "testapp2")
                 .startServer();
@@ -50,10 +55,8 @@ public class TapestryModuleIT {
 
     @Test
     public void testPageRender_T5_BQInjection() {
-        app.newRuntime().configurator(bootique -> bootique
-                .module(JettyModule.class)
-                .module(TapestryModule.class)
-                .module(TestApp2BootiqueModule.class))
+        app.app()
+                .modules(JettyModule.class, TapestryModule.class, TestApp2BootiqueModule.class)
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp2")
                 .property("bq.tapestry.name", "testapp2")
                 .startServer();
@@ -63,13 +66,11 @@ public class TapestryModuleIT {
 
     @Test
     public void testPageRender_T5_BQInjection_Annotations() {
-        app.newRuntime().configurator(bootique -> bootique
-                .module(JettyModule.class)
-                .module(TapestryModule.class)
-                .module(TestApp2BootiqueModule.class))
+        app.app("testarg", "testarg2")
+                .modules(JettyModule.class, TapestryModule.class, TestApp2BootiqueModule.class)
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp2")
                 .property("bq.tapestry.name", "testapp2")
-                .startServer("testarg", "testarg2");
+                .startServer();
 
         assertHtml("/bqannotatedservices", "BQAnnotatedServices", "--server_testarg_testarg2");
     }
