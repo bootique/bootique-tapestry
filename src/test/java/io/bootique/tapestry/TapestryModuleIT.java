@@ -92,6 +92,6 @@ public class TapestryModuleIT {
         assertTrue(html.endsWith("</html>"));
 
         assertTrue(html.contains("<title>" + expectedTitle + "</title>"));
-        assertTrue(html.contains(expectedBody));
+        assertTrue("Unexpected html: " + html, html.contains(expectedBody));
     }
 }

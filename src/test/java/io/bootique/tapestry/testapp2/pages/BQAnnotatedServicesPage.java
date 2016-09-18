@@ -13,7 +13,7 @@ public class BQAnnotatedServicesPage {
     private String[] args;
 
     public String getProperty() {
-        return Arrays.asList(args).stream().collect(Collectors.joining("_"));
+        return Arrays.asList(args).stream().sorted().collect(Collectors.joining("_"));
     }
 
 }
