@@ -27,7 +27,7 @@ public class TapestryModuleIT {
                 .module(JettyModule.class)
                 .module(TapestryModule.class)
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp1")
-                .startServer();
+                .start();
 
         assertHtml("/", "Index", "[xyz]");
     }
@@ -37,7 +37,7 @@ public class TapestryModuleIT {
         app.app()
                 .modules(JettyModule.class, TapestryModule.class)
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp1")
-                .startServer();
+                .start();
 
         assertHtml("/page2", "I am wrapped", "[I am page2 body]");
     }
@@ -48,7 +48,7 @@ public class TapestryModuleIT {
                 .modules(JettyModule.class, TapestryModule.class)
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp2")
                 .property("bq.tapestry.name", "testapp2")
-                .startServer();
+                .start();
 
         assertHtml("/", "Index", "[III]");
     }
@@ -59,7 +59,7 @@ public class TapestryModuleIT {
                 .modules(JettyModule.class, TapestryModule.class, TestApp2BootiqueModule.class)
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp2")
                 .property("bq.tapestry.name", "testapp2")
-                .startServer();
+                .start();
 
         assertHtml("/bqservices", "BQServices", "{III}");
     }
@@ -70,7 +70,7 @@ public class TapestryModuleIT {
                 .modules(JettyModule.class, TapestryModule.class, TestApp2BootiqueModule.class)
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp2")
                 .property("bq.tapestry.name", "testapp2")
-                .startServer();
+                .start();
 
         assertHtml("/bqannotatedservices", "BQAnnotatedServices", "--server_testarg_testarg2");
     }
