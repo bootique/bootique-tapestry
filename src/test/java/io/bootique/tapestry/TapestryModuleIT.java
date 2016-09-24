@@ -72,7 +72,7 @@ public class TapestryModuleIT {
                 .property("bq.tapestry.name", "testapp2")
                 .start();
 
-        assertHtml("/bqannotatedservices", "BQAnnotatedServices", "--server_testarg_testarg2");
+        assertHtml("/bqannotatedservices", "BQAnnotatedServices", "testarg_testarg2");
     }
 
     private void assertHtml(String uri, String expectedTitle, String expectedBody) {
