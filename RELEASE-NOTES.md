@@ -1,6 +1,7 @@
 ## 0.4
 
 * #5 Merging pages/components from different modules
+* #6 Upgrade to BQ 0.21
 
 ## 0.3
 
