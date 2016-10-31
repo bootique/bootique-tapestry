@@ -75,6 +75,19 @@ public class TapestryModuleIT {
         assertHtml("/bqannotatedservices", "BQAnnotatedServices", "testarg_testarg2");
     }
 
+    @Test
+    public void testPageRender_LibComponent() {
+        app.app()
+                .module(JettyModule.class)
+                .module(TapestryModule.class)
+                .module(b ->
+                        TapestryModule.contributeLibraries(b).addBinding("lib").toInstance("io.bootique.tapestry.testlib1"))
+                .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp2")
+                .start();
+
+        assertHtml("/bqpagewithlibcomponent", "Index with Lib", "<b>__val__</b>");
+    }
+
     private void assertHtml(String uri, String expectedTitle, String expectedBody) {
         Response r = BASE_TARGET.path(uri).request(MediaType.TEXT_HTML).get();
         assertEquals(200, r.getStatus());

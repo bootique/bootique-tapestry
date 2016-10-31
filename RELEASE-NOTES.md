@@ -1,3 +1,7 @@
+## 0.4
+
+* #5 Merging pages/components from different modules
+
 ## 0.3
 
 * #4 Upgrade to Bootique 0.20
