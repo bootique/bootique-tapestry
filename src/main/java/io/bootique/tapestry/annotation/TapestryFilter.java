@@ -1,4 +1,4 @@
-package io.bootique.tapestry;
+package io.bootique.tapestry.annotation;
 
 import com.google.inject.BindingAnnotation;
 

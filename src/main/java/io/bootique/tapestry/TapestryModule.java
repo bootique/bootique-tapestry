@@ -11,6 +11,7 @@ import io.bootique.config.ConfigurationFactory;
 import io.bootique.jetty.JettyModule;
 import io.bootique.jetty.MappedFilter;
 import io.bootique.tapestry.annotation.LibraryMappings;
+import io.bootique.tapestry.annotation.TapestryFilter;
 import io.bootique.tapestry.filter.BQTapestryFilterFactory;
 
 public class TapestryModule extends ConfigModule {
