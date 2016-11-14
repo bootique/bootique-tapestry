@@ -1,7 +1,7 @@
 package io.bootique.tapestry;
 
-import io.bootique.jetty.test.junit.JettyTestFactory;
 import io.bootique.jetty.JettyModule;
+import io.bootique.jetty.test.junit.JettyTestFactory;
 import io.bootique.tapestry.testapp2.bq.TestApp2BootiqueModule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -88,6 +88,23 @@ public class TapestryModuleIT {
         assertHtml("/bqpagewithlibcomponent", "Index with Lib", "<b>__val__</b>");
     }
 
+    @Test
+    public void testIgnorePaths() {
+        app.app()
+                .module(JettyModule.class)
+                .module(TapestryModule.class)
+                .module(b -> {
+                    TapestryModule.contributeIgnoredPaths(b).addBinding().toInstance("/ignored_by_tapestry/*");
+                    JettyModule.contributeDefaultServlet(b);
+                })
+                .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp1")
+                .property("bq.jetty.staticResourceBase", "classpath:docroot")
+                .start();
+
+        assertHtml("/", "Index", "[xyz]");
+        assertHtml("/ignored_by_tapestry/static.html", "Static", "I am a static file");
+    }
+
     private void assertHtml(String uri, String expectedTitle, String expectedBody) {
         Response r = BASE_TARGET.path(uri).request(MediaType.TEXT_HTML).get();
         assertEquals(200, r.getStatus());
@@ -104,7 +121,7 @@ public class TapestryModuleIT {
         assertTrue(html.startsWith("<!DOCTYPE html><html"));
         assertTrue(html.endsWith("</html>"));
 
-        assertTrue(html.contains("<title>" + expectedTitle + "</title>"));
+        assertTrue("Expected: " + expectedTitle, html.contains("<title>" + expectedTitle + "</title>"));
         assertTrue("Unexpected html: " + html, html.contains(expectedBody));
     }
 }
