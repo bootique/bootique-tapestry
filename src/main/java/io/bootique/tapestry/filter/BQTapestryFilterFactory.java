@@ -13,7 +13,6 @@ import org.apache.tapestry5.ioc.services.SymbolProvider;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class BQTapestryFilterFactory {
 
@@ -24,7 +23,7 @@ public class BQTapestryFilterFactory {
 
     // properties from http://tapestry.apache.org/configuration.html
 
-    protected boolean productionMode;
+    protected Boolean productionMode;
     protected String executionModes;
     protected String supportedLocales;
     protected String charset;
@@ -40,7 +39,7 @@ public class BQTapestryFilterFactory {
         this.charset = "UTF-8";
     }
 
-    public void setProductionMode(boolean productionMode) {
+    public void setProductionMode(Boolean productionMode) {
         this.productionMode = productionMode;
     }
 
@@ -72,8 +71,8 @@ public class BQTapestryFilterFactory {
         this.urlPattern = urlPattern;
     }
 
-    public MappedFilter createTapestryFilter(Injector injector) {
-        SymbolProvider symbolProvider = createSymbolProvider();
+    public MappedFilter createTapestryFilter(Injector injector, Map<String, String> diSymbols) {
+        SymbolProvider symbolProvider = createSymbolProvider(diSymbols);
         BQTapestryFilter filter = new BQTapestryFilter(name, symbolProvider, extraModules(), extraModuleDefs(injector));
         return new MappedFilter(filter, Collections.singleton(urlPattern), name, filterOrder);
     }
@@ -88,22 +87,35 @@ public class BQTapestryFilterFactory {
         return new ModuleDef[]{guiceBridge};
     }
 
-    protected SymbolProvider createSymbolProvider() {
+    protected SymbolProvider createSymbolProvider(Map<String, String> diSymbols) {
 
-        // TODO: support more Tapestry symbols
+        Map<String, String> params = new HashMap<>(diSymbols);
 
-        Map<String, String> params = new HashMap<>();
-        params.put(SymbolConstants.PRODUCTION_MODE, Boolean.toString(productionMode));
-        params.put(SymbolConstants.EXECUTION_MODE, executionModes);
-        params.put(SymbolConstants.CHARSET, charset);
+        // override DI symbols if set explicitly in the factory
+        if (productionMode != null) {
+            params.put(SymbolConstants.PRODUCTION_MODE, Boolean.toString(productionMode));
+        }
 
-        // compression should be configured at the Jetty level
-        params.put(SymbolConstants.GZIP_COMPRESSION_ENABLED, "false");
+        if (executionModes != null) {
+            params.put(SymbolConstants.EXECUTION_MODE, executionModes);
+        }
 
-        params.put(InternalConstants.TAPESTRY_APP_PACKAGE_PARAM, Objects.requireNonNull(appPackage));
+        if (charset != null) {
+            params.put(SymbolConstants.CHARSET, charset);
+        }
+
+        if (appPackage != null) {
+            params.put(InternalConstants.TAPESTRY_APP_PACKAGE_PARAM, appPackage);
+        }
 
         if (supportedLocales != null) {
             params.put(SymbolConstants.SUPPORTED_LOCALES, supportedLocales);
+        }
+
+        // provide default values for symbols if not defined in DI
+        if (!params.containsKey(SymbolConstants.GZIP_COMPRESSION_ENABLED)) {
+            // compression should be configured at the Jetty level
+            params.put(SymbolConstants.GZIP_COMPRESSION_ENABLED, "false");
         }
 
         return new MapSymbolProvider(params);
