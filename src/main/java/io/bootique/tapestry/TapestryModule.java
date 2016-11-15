@@ -27,6 +27,7 @@ public class TapestryModule extends ConfigModule {
      * @param binder DI binder to use for contributions.
      * @return A new MapBinder.
      * @see org.apache.tapestry5.SymbolConstants
+     * @see org.apache.tapestry5.internal.InternalConstants
      * @since 0.4
      */
     public static MapBinder<String, String> contributeSymbols(Binder binder) {
