@@ -110,7 +110,7 @@ public class BQTapestryFilterFactory {
             // sanity check
             if (!params.containsKey(InternalConstants.TAPESTRY_APP_PACKAGE_PARAM)) {
                 throw new IllegalStateException("Tapestry app package is not defined. Use 'tapestry.appPackage' config " +
-                        "or inject 'tapestry.app-package' symbol with this value.")
+                        "or inject 'tapestry.app-package' symbol with this value.");
             }
         }
 
