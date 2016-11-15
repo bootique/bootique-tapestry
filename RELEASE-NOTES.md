@@ -3,6 +3,7 @@
 * #5 Merging pages/components from different modules
 * #6 Upgrade to BQ 0.21
 * #7 Ignored paths
+* #8 Contribution API for Tapestry symbols
 
 ## 0.3
 
