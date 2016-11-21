@@ -4,6 +4,7 @@
 * #6 Upgrade to BQ 0.21
 * #7 Ignored paths
 * #8 Contribution API for Tapestry symbols
+* #9 Allow to contribute Tapestry modules
 
 ## 0.3
 

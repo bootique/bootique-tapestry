@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
+import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.MapBinder;
 import com.google.inject.multibindings.Multibinder;
 import io.bootique.ConfigModule;
@@ -15,9 +16,12 @@ import io.bootique.tapestry.annotation.IgnoredPaths;
 import io.bootique.tapestry.annotation.LibraryMappings;
 import io.bootique.tapestry.annotation.Symbols;
 import io.bootique.tapestry.annotation.TapestryFilter;
+import io.bootique.tapestry.annotation.TapestryModuleBinding;
+import io.bootique.tapestry.di.GuiceTapestryModule;
 import io.bootique.tapestry.filter.BQTapestryFilterFactory;
 
 import java.util.Map;
+import java.util.Set;
 
 public class TapestryModule extends ConfigModule {
 
@@ -39,6 +43,20 @@ public class TapestryModule extends ConfigModule {
     }
 
     /**
+     * Returns a Multibinder for extra Tapestry modules. Custom DI modules allow to customize anything inside the Tapestry
+     * stack. Note that Tapestry DI modules (unlike Bootique or Guice) do not inherit from anything.
+     *
+     * @param binder DI binder to use for contributions.
+     * @return a Multibinder for Tapestry modules.
+     * @since 0.4
+     */
+    public static Multibinder<Class<?>> contributeModules(Binder binder) {
+        TypeLiteral<Class<?>> type = new TypeLiteral<Class<?>>() {
+        };
+        return Multibinder.newSetBinder(binder, Key.get(type, TapestryModuleBinding.class));
+    }
+
+    /**
      * @param binder DI binder to use for contributions.
      * @return Multibinder for URL paths that should not be processed by Tapestry.
      * @since 0.4
@@ -54,6 +72,7 @@ public class TapestryModule extends ConfigModule {
         contributeLibraries(binder);
         contributeIgnoredPaths(binder);
         contributeSymbols(binder);
+        contributeModules(binder).addBinding().toInstance(GuiceTapestryModule.class);
     }
 
     @Singleton
@@ -62,10 +81,11 @@ public class TapestryModule extends ConfigModule {
     MappedFilter createTapestryFilter(
             ConfigurationFactory configurationFactory,
             Injector injector,
-            @Symbols Map<String, String> diSymbols) {
+            @Symbols Map<String, String> diSymbols,
+            @TapestryModuleBinding Set<Class<?>> moduleTypes) {
 
         return configurationFactory
                 .config(BQTapestryFilterFactory.class, configPrefix)
-                .createTapestryFilter(injector, diSymbols);
+                .createTapestryFilter(injector, diSymbols, moduleTypes);
     }
 }

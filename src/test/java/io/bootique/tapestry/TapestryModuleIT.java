@@ -105,6 +105,19 @@ public class TapestryModuleIT {
         assertHtml("/ignored_by_tapestry/static.html", "Static", "I am a static file");
     }
 
+    @Test
+    public void testPageRender_T5Modules() {
+        app.app()
+                .module(JettyModule.class)
+                .module(TapestryModule.class)
+                .module(b ->
+                        TapestryModule.contributeModules(b).addBinding().toInstance(TestApp3Module.class))
+                .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp3")
+                .start();
+
+        assertHtml("/page1", "Testapp3 Page1", ":DeferredServiceImpl:");
+    }
+
     private void assertHtml(String uri, String expectedTitle, String expectedBody) {
         Response r = BASE_TARGET.path(uri).request(MediaType.TEXT_HTML).get();
         assertEquals(200, r.getStatus());

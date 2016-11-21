@@ -2,7 +2,6 @@ package io.bootique.tapestry.filter;
 
 import com.google.inject.Injector;
 import io.bootique.jetty.MappedFilter;
-import io.bootique.tapestry.di.GuiceTapestryModule;
 import io.bootique.tapestry.di.InjectorModuleDef;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.internal.InternalConstants;
@@ -13,6 +12,7 @@ import org.apache.tapestry5.ioc.services.SymbolProvider;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class BQTapestryFilterFactory {
 
@@ -71,14 +71,14 @@ public class BQTapestryFilterFactory {
         this.urlPattern = urlPattern;
     }
 
-    public MappedFilter createTapestryFilter(Injector injector, Map<String, String> diSymbols) {
+    public MappedFilter createTapestryFilter(Injector injector, Map<String, String> diSymbols, Set<Class<?>> customModules) {
         SymbolProvider symbolProvider = createSymbolProvider(diSymbols);
-        BQTapestryFilter filter = new BQTapestryFilter(name, symbolProvider, extraModules(), extraModuleDefs(injector));
+        BQTapestryFilter filter = new BQTapestryFilter(name, symbolProvider, toModuleArray(customModules), extraModuleDefs(injector));
         return new MappedFilter(filter, Collections.singleton(urlPattern), name, filterOrder);
     }
 
-    protected Class[] extraModules() {
-        return new Class[]{GuiceTapestryModule.class};
+    protected Class[] toModuleArray(Set<Class<?>> modules) {
+        return modules.toArray(new Class[modules.size()]);
     }
 
     protected ModuleDef[] extraModuleDefs(Injector injector) {
