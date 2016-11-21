@@ -8,6 +8,7 @@ import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.MapBinder;
 import com.google.inject.multibindings.Multibinder;
+import io.bootique.BQCoreModule;
 import io.bootique.ConfigModule;
 import io.bootique.config.ConfigurationFactory;
 import io.bootique.jetty.JettyModule;
@@ -22,6 +23,7 @@ import io.bootique.tapestry.filter.BQTapestryFilterFactory;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
 
 public class TapestryModule extends ConfigModule {
 
@@ -73,6 +75,14 @@ public class TapestryModule extends ConfigModule {
         contributeIgnoredPaths(binder);
         contributeSymbols(binder);
         contributeModules(binder).addBinding().toInstance(GuiceTapestryModule.class);
+
+        // decrease default verbosity...
+        BQCoreModule.contributeLogLevels(binder)
+                .addBinding("org.apache.tapestry5.modules.TapestryModule.ComponentClassResolver")
+                .toInstance(Level.WARNING);
+        BQCoreModule.contributeLogLevels(binder)
+                .addBinding("io.bootique.tapestry.filter.BQTapestryFilter")
+                .toInstance(Level.WARNING);
     }
 
     @Singleton

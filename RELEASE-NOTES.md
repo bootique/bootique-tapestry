@@ -5,6 +5,7 @@
 * #7 Ignored paths
 * #8 Contribution API for Tapestry symbols
 * #9 Allow to contribute Tapestry modules
+* #10 Reduce default tapestry startup logging output
 
 ## 0.3
 

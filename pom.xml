@@ -80,6 +80,23 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- Compile dependencies -->
+		<dependency>
+			<groupId>io.bootique</groupId>
+			<artifactId>bootique</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.bootique.jetty</groupId>
+			<artifactId>bootique-jetty</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-core</artifactId>
+			<version>5.4.1</version>
+		</dependency>
+
 		<!-- Unit test dependencies -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -91,7 +108,6 @@
 			<artifactId>mockito-core</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
@@ -111,23 +127,6 @@
 			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-client</artifactId>
 			<scope>test</scope>
-		</dependency>
-
-		<!-- Compile dependencies -->
-		<dependency>
-			<groupId>io.bootique</groupId>
-			<artifactId>bootique</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.bootique.jetty</groupId>
-			<artifactId>bootique-jetty</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tapestry</groupId>
-			<artifactId>tapestry-core</artifactId>
-			<version>5.4.1</version>
 		</dependency>
 	</dependencies>
 
