@@ -3,6 +3,7 @@ package io.bootique.tapestry;
 import io.bootique.jetty.JettyModule;
 import io.bootique.jetty.test.junit.JettyTestFactory;
 import io.bootique.tapestry.testapp2.bq.TestApp2BootiqueModule;
+import org.apache.tapestry5.services.LibraryMapping;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -81,7 +82,8 @@ public class TapestryModuleIT {
                 .module(JettyModule.class)
                 .module(TapestryModule.class)
                 .module(b ->
-                        TapestryModule.contributeLibraries(b).addBinding("lib").toInstance("io.bootique.tapestry.testlib1"))
+                        TapestryModule.contributeLibraries(b).addBinding()
+                                .toInstance(new LibraryMapping("lib", "io.bootique.tapestry.testlib1")))
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp2")
                 .start();
 

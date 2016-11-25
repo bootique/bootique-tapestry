@@ -14,12 +14,12 @@ import io.bootique.config.ConfigurationFactory;
 import io.bootique.jetty.JettyModule;
 import io.bootique.jetty.MappedFilter;
 import io.bootique.tapestry.annotation.IgnoredPaths;
-import io.bootique.tapestry.annotation.LibraryMappings;
 import io.bootique.tapestry.annotation.Symbols;
 import io.bootique.tapestry.annotation.TapestryFilter;
 import io.bootique.tapestry.annotation.TapestryModuleBinding;
 import io.bootique.tapestry.di.GuiceTapestryModule;
 import io.bootique.tapestry.filter.BQTapestryFilterFactory;
+import org.apache.tapestry5.services.LibraryMapping;
 
 import java.util.Map;
 import java.util.Set;
@@ -40,8 +40,8 @@ public class TapestryModule extends ConfigModule {
         return MapBinder.newMapBinder(binder, String.class, String.class, Symbols.class);
     }
 
-    public static MapBinder<String, String> contributeLibraries(Binder binder) {
-        return MapBinder.newMapBinder(binder, String.class, String.class, LibraryMappings.class);
+    public static Multibinder<LibraryMapping> contributeLibraries(Binder binder) {
+        return Multibinder.newSetBinder(binder, LibraryMapping.class);
     }
 
     /**

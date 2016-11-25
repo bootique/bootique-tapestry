@@ -4,13 +4,11 @@ import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.TypeLiteral;
 import io.bootique.tapestry.annotation.IgnoredPaths;
-import io.bootique.tapestry.annotation.LibraryMappings;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.services.LibraryMapping;
 
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -42,9 +40,8 @@ public class GuiceTapestryModule {
         // register Tapestry component libraries.
 
 
-        TypeLiteral<Map<String, String>> libsType = new TypeLiteral<Map<String, String>>() {
+        TypeLiteral<Set<LibraryMapping>> libsType = new TypeLiteral<Set<LibraryMapping>>() {
         };
-        Map<String, String> libsMap = injector.getInstance(Key.get(libsType, LibraryMappings.class));
-        libsMap.forEach((prefix, pack) -> configuration.add(new LibraryMapping(prefix, pack)));
+        injector.getInstance(Key.get(libsType)).forEach(configuration::add);
     }
 }
