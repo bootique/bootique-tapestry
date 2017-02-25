@@ -1,3 +1,7 @@
+## 0.5
+
+* #12 Upgrade to Bootique 0.22, new extend API, config annotations
+
 ## 0.4
 
 * #5 Merging pages/components from different modules

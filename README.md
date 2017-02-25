@@ -14,7 +14,7 @@ Add the module to your Bootique app:
         <dependency>
             <groupId>io.bootique.bom</groupId>
             <artifactId>bootique-bom</artifactId>
-            <version>0.19</version>
+            <version>0.21</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>

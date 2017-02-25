@@ -81,9 +81,8 @@ public class TapestryModuleIT {
         app.app()
                 .module(JettyModule.class)
                 .module(TapestryModule.class)
-                .module(b ->
-                        TapestryModule.contributeLibraries(b).addBinding()
-                                .toInstance(new LibraryMapping("lib", "io.bootique.tapestry.testlib1")))
+                .module(b -> TapestryModule.extend(b)
+                        .addLibraryMapping(new LibraryMapping("lib", "io.bootique.tapestry.testlib1")))
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp2")
                 .start();
 
@@ -96,8 +95,8 @@ public class TapestryModuleIT {
                 .module(JettyModule.class)
                 .module(TapestryModule.class)
                 .module(b -> {
-                    TapestryModule.contributeIgnoredPaths(b).addBinding().toInstance("/ignored_by_tapestry/*");
-                    JettyModule.contributeDefaultServlet(b);
+                    TapestryModule.extend(b).addIgnoredPath("/ignored_by_tapestry/*");
+                    JettyModule.extend(b).useDefaultServlet();
                 })
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp1")
                 .property("bq.jetty.staticResourceBase", "classpath:docroot")
@@ -112,8 +111,7 @@ public class TapestryModuleIT {
         app.app()
                 .module(JettyModule.class)
                 .module(TapestryModule.class)
-                .module(b ->
-                        TapestryModule.contributeModules(b).addBinding().toInstance(TestApp3Module.class))
+                .module(b -> TapestryModule.extend(b).addTapestryModule(TestApp3Module.class))
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp3")
                 .start();
 

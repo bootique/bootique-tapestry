@@ -1,6 +1,8 @@
 package io.bootique.tapestry.filter;
 
 import com.google.inject.Injector;
+import io.bootique.annotation.BQConfig;
+import io.bootique.annotation.BQConfigProperty;
 import io.bootique.jetty.MappedFilter;
 import io.bootique.tapestry.di.InjectorModuleDef;
 import org.apache.tapestry5.SymbolConstants;
@@ -14,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+@BQConfig
 public class BQTapestryFilterFactory {
 
     protected String urlPattern;
@@ -39,39 +42,47 @@ public class BQTapestryFilterFactory {
         this.charset = "UTF-8";
     }
 
+    @BQConfigProperty
     public void setProductionMode(Boolean productionMode) {
         this.productionMode = productionMode;
     }
 
+    @BQConfigProperty
     public void setExecutionModes(String executionModes) {
         this.executionModes = executionModes;
     }
 
+    @BQConfigProperty
     public void setSupportedLocales(String supportedLocales) {
         this.supportedLocales = supportedLocales;
     }
 
+    @BQConfigProperty
     public void setCharset(String charset) {
         this.charset = charset;
     }
 
+    @BQConfigProperty
     public void setName(String name) {
         this.name = name;
     }
 
+    @BQConfigProperty
     public void setAppPackage(String appPackage) {
         this.appPackage = appPackage;
     }
 
+    @BQConfigProperty
     public void setFilterOrder(int filterOrder) {
         this.filterOrder = filterOrder;
     }
 
+    @BQConfigProperty
     public void setUrlPattern(String urlPattern) {
         this.urlPattern = urlPattern;
     }
 
-    public MappedFilter createTapestryFilter(Injector injector, Map<String, String> diSymbols, Set<Class<?>> customModules) {
+    public MappedFilter<BQTapestryFilter> createTapestryFilter(Injector injector, Map<String, String> diSymbols, Set<Class<?>> customModules) {
         SymbolProvider symbolProvider = createSymbolProvider(diSymbols);
         BQTapestryFilter filter = new BQTapestryFilter(name, symbolProvider, toModuleArray(customModules), extraModuleDefs(injector));
         return new MappedFilter(filter, Collections.singleton(urlPattern), name, filterOrder);

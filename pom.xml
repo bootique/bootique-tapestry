@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>io.bootique.modules.parent</groupId>
 		<artifactId>bootique-modules-parent</artifactId>
-		<version>0.2</version>
+		<version>0.7</version>
 	</parent>
 
 	<groupId>io.bootique.tapestry</groupId>
@@ -19,8 +19,8 @@
 	</description>
 
 	<properties>
-		<bootique-version>0.21</bootique-version>
-		<bootique-jetty-version>0.19</bootique-jetty-version>
+		<bootique-version>0.22-SNAPSHOT</bootique-version>
+		<bootique-jetty-version>0.20-SNAPSHOT</bootique-jetty-version>
 		<jersey-version>2.21</jersey-version>
 		<tapestry-version>5.4.1</tapestry-version>
 	</properties>
@@ -69,7 +69,7 @@
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-simple</artifactId>
-				<version>1.7.13</version>
+				<version>${slf4j.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.tapestry</groupId>

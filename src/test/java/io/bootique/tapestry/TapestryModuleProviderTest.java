@@ -10,4 +10,7 @@ public class TapestryModuleProviderTest {
         BQModuleProviderChecker.testPresentInJar(TapestryModuleProvider.class);
     }
 
+    public void testMetadata() {
+        BQModuleProviderChecker.testMetadata(TapestryModuleProvider.class);
+    }
 }
