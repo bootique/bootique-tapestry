@@ -20,6 +20,19 @@ public class TapestryServletEnvironmentIT {
     public JettyTestFactory app = new JettyTestFactory();
 
     @Test
+    public void testGetRegistry_BeforeStart() {
+        BQRuntime runtime = app.app()
+                .module(JettyModule.class)
+                .module(TapestryModule.class)
+                .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp1")
+                // create runtime, but do not start .. no registry yet
+                .createRuntime();
+
+        Optional<Registry> registry = runtime.getInstance(TapestryEnvironment.class).getRegistry();
+        Assert.assertFalse(registry.isPresent());
+    }
+
+    @Test
     public void testGetRegistry() {
         BQRuntime runtime = app.app()
                 .module(JettyModule.class)
