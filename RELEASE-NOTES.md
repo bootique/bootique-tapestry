@@ -1,6 +1,6 @@
 ## 0.7
 
-* #13  Expose T5 Registry as injectable serice
+* #13  Expose T5 Registry as injectable service
 
 ## 0.5
 

@@ -24,7 +24,7 @@ public class TapestryServletEnvironmentIT {
         BQRuntime runtime = app.app()
                 .module(JettyModule.class)
                 .module(TapestryModule.class)
-                .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp1")
+                .property("bq.tapestry.appPackage", "no.such.package")
                 // create runtime, but do not start .. no registry yet
                 .createRuntime();
 
@@ -37,7 +37,7 @@ public class TapestryServletEnvironmentIT {
         BQRuntime runtime = app.app()
                 .module(JettyModule.class)
                 .module(TapestryModule.class)
-                .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp1")
+                .property("bq.tapestry.appPackage", "no.such.package")
                 .start();
 
         Optional<Registry> registry = runtime.getInstance(TapestryEnvironment.class).getRegistry();
