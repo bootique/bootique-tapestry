@@ -13,10 +13,13 @@ import io.bootique.ConfigModule;
 import io.bootique.config.ConfigurationFactory;
 import io.bootique.jetty.JettyModule;
 import io.bootique.jetty.MappedFilter;
+import io.bootique.jetty.servlet.ServletEnvironment;
 import io.bootique.tapestry.annotation.IgnoredPaths;
 import io.bootique.tapestry.annotation.Symbols;
 import io.bootique.tapestry.annotation.TapestryModuleBinding;
 import io.bootique.tapestry.di.GuiceTapestryModule;
+import io.bootique.tapestry.env.TapestryEnvironment;
+import io.bootique.tapestry.env.TapestryServletEnvironment;
 import io.bootique.tapestry.filter.BQTapestryFilter;
 import io.bootique.tapestry.filter.BQTapestryFilterFactory;
 import org.apache.tapestry5.services.LibraryMapping;
@@ -105,6 +108,12 @@ public class TapestryModule extends ConfigModule {
         BQCoreModule.extend(binder)
                 .setLogLevel("org.apache.tapestry5.modules.TapestryModule.ComponentClassResolver", Level.WARNING)
                 .setLogLevel("io.bootique.tapestry.filter.BQTapestryFilter", Level.WARNING);
+    }
+
+    @Singleton
+    @Provides
+    TapestryEnvironment provideTapestryEnvironment(ServletEnvironment servletEnvironment) {
+        return new TapestryServletEnvironment(servletEnvironment);
     }
 
     @Singleton

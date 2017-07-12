@@ -1,3 +1,7 @@
+## 0.7
+
+* #13  Expose T5 Registry as injectable serice
+
 ## 0.5
 
 * #12 Upgrade to Bootique 0.22, new extend API, config annotations
