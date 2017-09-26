@@ -3,6 +3,7 @@
 
 # bootique-tapestry
 Provides [Apache Tapestry](http://tapestry.apache.org/) integration with [Bootique](http://bootique.io).
+See usage example [bootique-tapestry-demo](https://github.com/bootique-examples/bootique-tapestry-demo).
 
 ## Quick configuration:
 
