@@ -20,7 +20,6 @@
 
 	<properties>
 		<bootique-version>${project.version}</bootique-version>
-		<bootique-jetty-version>${project.version}</bootique-jetty-version>
 		<jersey-version>2.21</jersey-version>
 		<tapestry-version>5.4.1</tapestry-version>
 	</properties>
@@ -54,12 +53,12 @@
 			<dependency>
 				<groupId>io.bootique.jetty</groupId>
 				<artifactId>bootique-jetty</artifactId>
-				<version>${bootique-jetty-version}</version>
+				<version>${bootique-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>io.bootique.jetty</groupId>
 				<artifactId>bootique-jetty-test</artifactId>
-				<version>${bootique-jetty-version}</version>
+				<version>${bootique-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.glassfish.jersey.core</groupId>
