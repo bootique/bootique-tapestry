@@ -1,14 +1,32 @@
 language: java
 
-jdk:
-  - oraclejdk8
-
-branches:
-  only:
-    - master
+jobs:
+  include:
+    - stage: build
+      if: branch != master OR type IN (pull_request)
+      jdk: oraclejdk9
+      script:
+        - echo "Disabled" && exit 0
+        - mvn clean verify
+    - stage: build
+      if: branch != master OR type IN (pull_request)
+      jdk: oraclejdk8
+      script:
+        - mvn clean verify
+    - stage: build
+      if: branch = master AND type IN (push)
+      jdk: oraclejdk9
+      script:
+        - echo "Disabled" && exit 0
+        - mvn clean verify
+    - stage: build
+      if: branch = master AND type IN (push)
+      jdk: oraclejdk8
+      script:
+        - mvn clean source:jar javadoc:javadoc deploy --settings travis_settings.xml
 
 script:
-  - 'if [ "$TRAVIS_SECURE_ENV_VARS" = "true" ]; then mvn clean source:jar javadoc:javadoc deploy --settings travis_settings.xml; fi'
+  - 'if [ "$TRAVIS_SECURE_ENV_VARS" = "true" ]; then ; fi'
   - 'if [ "$TRAVIS_SECURE_ENV_VARS" = "false" ]; then mvn clean verify; fi'
 
 # travis encrypt -r bootique/bootique-tapestry "CI_DEPLOY_USERNAME='name'"
