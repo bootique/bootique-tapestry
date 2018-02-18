@@ -1,3 +1,7 @@
+## 0.25
+
+* #14 Upgrade to bootique-modules-parent 0.8
+
 ## 0.24
 
 * #13  Expose T5 Registry as injectable service
