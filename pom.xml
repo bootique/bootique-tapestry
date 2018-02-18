@@ -56,11 +56,6 @@
 				<version>${bootique-version}</version>
 			</dependency>
 			<dependency>
-				<groupId>io.bootique.jetty</groupId>
-				<artifactId>bootique-jetty-test</artifactId>
-				<version>${bootique-version}</version>
-			</dependency>
-			<dependency>
 				<groupId>org.glassfish.jersey.core</groupId>
 				<artifactId>jersey-client</artifactId>
 				<version>${jersey-version}</version>
@@ -115,11 +110,6 @@
 		<dependency>
 			<groupId>io.bootique</groupId>
 			<artifactId>bootique-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.bootique.jetty</groupId>
-			<artifactId>bootique-jetty-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

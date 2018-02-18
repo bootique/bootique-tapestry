@@ -1,8 +1,8 @@
 package io.bootique.tapestry;
 
 import io.bootique.jetty.JettyModule;
-import io.bootique.jetty.test.junit.JettyTestFactory;
 import io.bootique.tapestry.testapp2.bq.TestApp2BootiqueModule;
+import io.bootique.test.junit.BQTestFactory;
 import org.apache.tapestry5.services.LibraryMapping;
 import org.junit.Rule;
 import org.junit.Test;
@@ -20,78 +20,78 @@ public class TapestryModuleIT {
     private static WebTarget BASE_TARGET = ClientBuilder.newClient().target("http://127.0.0.1:8080/");
 
     @Rule
-    public JettyTestFactory app = new JettyTestFactory();
+    public BQTestFactory app = new BQTestFactory();
 
     @Test
     public void testPageRender_Index() {
-        app.app()
-                .module(JettyModule.class)
-                .module(TapestryModule.class)
+        app.app("-s")
+                .module(new TapestryModuleProvider())
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp1")
-                .start();
+                .run();
 
         assertHtml("/", "Index", "[xyz]");
     }
 
     @Test
     public void testPageRender_Page2() {
-        app.app()
-                .modules(JettyModule.class, TapestryModule.class)
+        app.app("-s")
+                .module(new TapestryModuleProvider())
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp1")
-                .start();
+                .run();
 
         assertHtml("/page2", "I am wrapped", "[I am page2 body]");
     }
 
     @Test
     public void testPageRender_T5_Injection() {
-        app.app()
-                .modules(JettyModule.class, TapestryModule.class)
+        app.app("-s")
+                .module(new TapestryModuleProvider())
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp2")
                 .property("bq.tapestry.name", "testapp2")
-                .start();
+                .run();
 
         assertHtml("/", "Index", "[III]");
     }
 
     @Test
     public void testPageRender_T5_BQInjection() {
-        app.app()
-                .modules(JettyModule.class, TapestryModule.class, TestApp2BootiqueModule.class)
+        app.app("-s")
+                .module(new TapestryModuleProvider())
+                .modules(TestApp2BootiqueModule.class)
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp2")
                 .property("bq.tapestry.name", "testapp2")
-                .start();
+                .run();
 
         assertHtml("/bqservices", "BQServices", "{III}");
     }
 
     @Test
     public void testPageRender_T5_BQInjection_Annotations() {
-        app.app("testarg", "testarg2")
-                .modules(JettyModule.class, TapestryModule.class, TestApp2BootiqueModule.class)
+        app.app("-s", "testarg", "testarg2")
+                .module(new TapestryModuleProvider())
+                .modules(TestApp2BootiqueModule.class)
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp2")
                 .property("bq.tapestry.name", "testapp2")
-                .start();
+                .run();
 
-        assertHtml("/bqannotatedservices", "BQAnnotatedServices", "testarg_testarg2");
+        assertHtml("/bqannotatedservices", "BQAnnotatedServices", "-s_testarg_testarg2");
     }
 
     @Test
     public void testPageRender_LibComponent() {
-        app.app()
-                .module(JettyModule.class)
-                .module(TapestryModule.class)
+        app.app("-s")
+                .module(new TapestryModuleProvider())
                 .module(b -> TapestryModule.extend(b)
                         .addLibraryMapping(new LibraryMapping("lib", "io.bootique.tapestry.testlib1")))
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp2")
-                .start();
+                .run();
 
         assertHtml("/bqpagewithlibcomponent", "Index with Lib", "<b>__val__</b>");
     }
 
     @Test
     public void testIgnorePaths() {
-        app.app()
+        app.app("-s")
                 .module(JettyModule.class)
                 .module(TapestryModule.class)
                 .module(b -> {
@@ -100,7 +100,7 @@ public class TapestryModuleIT {
                 })
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp1")
                 .property("bq.jetty.staticResourceBase", "classpath:docroot")
-                .start();
+                .run();
 
         assertHtml("/", "Index", "[xyz]");
         assertHtml("/ignored_by_tapestry/static.html", "Static", "I am a static file");
@@ -108,12 +108,12 @@ public class TapestryModuleIT {
 
     @Test
     public void testPageRender_T5Modules() {
-        app.app()
+        app.app("-s")
                 .module(JettyModule.class)
                 .module(TapestryModule.class)
                 .module(b -> TapestryModule.extend(b).addTapestryModule(TestApp3Module.class))
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp3")
-                .start();
+                .run();
 
         assertHtml("/page1", "Testapp3 Page1", ":DeferredServiceImpl:");
     }
