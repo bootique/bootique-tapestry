@@ -2,28 +2,31 @@ language: java
 
 jobs:
   include:
-    - stage: build
-      if: branch != master OR type IN (pull_request)
-      jdk: oraclejdk9
-      script:
-        - echo "Disabled" && exit 0
-        - mvn clean verify
+#    - stage: build
+#      if: branch != master OR type IN (pull_request)
+#      jdk: oraclejdk9
+#      script:
+#        - mvn clean verify
     - stage: build
       if: branch != master OR type IN (pull_request)
       jdk: oraclejdk8
       script:
         - mvn clean verify
+#    - stage: build
+#      if: branch = master AND type IN (push)
+#      jdk: oraclejdk9
+#      script:
+#        - mvn clean verify
     - stage: build
-      if: branch = master AND type IN (push)
-      jdk: oraclejdk9
-      script:
-        - echo "Disabled" && exit 0
-        - mvn clean verify
-    - stage: build
-      if: branch = master AND type IN (push)
+      if: branch = master AND type IN (push) AND repo = bootique/bootique-tapestry
       jdk: oraclejdk8
       script:
         - mvn clean source:jar javadoc:javadoc deploy --settings travis_settings.xml
+    - stage: build
+      if: branch = master AND type IN (push) AND repo != bootique/bootique-tapestry
+      jdk: oraclejdk8
+      script:
+        - mvn clean verify
 
 # travis encrypt -r bootique/bootique-tapestry "CI_DEPLOY_USERNAME='name'"
 # travis encrypt -r bootique/bootique-tapestry "CI_DEPLOY_PASSWORD='password'"
