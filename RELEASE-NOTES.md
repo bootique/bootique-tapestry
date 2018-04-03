@@ -1,3 +1,7 @@
+## 0.26
+
+* #15 Cleaning up APIs deprecated since <= 0.25
+
 ## 0.25
 
 * #14 Upgrade to bootique-modules-parent 0.8
