@@ -14,22 +14,35 @@
 # limitations under the License.
 
 jobs:
+  allow_failures:
+    - jdk: oraclejdk10
+    - jdk: openjdk11
   include:
-#    - stage: build
-#      if: branch != master OR type IN (pull_request)
-#      jdk: oraclejdk9
-#      script:
-#        - mvn clean verify
+    - stage: build
+      if: branch != master OR type IN (pull_request)
+      jdk: openjdk11
+      script:
+        - mvn clean verify
+    - stage: build
+      if: branch != master OR type IN (pull_request)
+      jdk: oraclejdk10
+      script:
+        - mvn clean verify
     - stage: build
       if: branch != master OR type IN (pull_request)
       jdk: oraclejdk8
       script:
         - mvn clean verify
-#    - stage: build
-#      if: branch = master AND type IN (push)
-#      jdk: oraclejdk9
-#      script:
-#        - mvn clean verify
+    - stage: build
+      if: branch = master AND type IN (push)
+      jdk: openjdk11
+      script:
+        - mvn clean verify
+    - stage: build
+      if: branch = master AND type IN (push)
+      jdk: oraclejdk10
+      script:
+        - mvn clean verify
     - stage: build
       if: branch = master AND type IN (push) AND repo = bootique/bootique-tapestry
       jdk: oraclejdk8
