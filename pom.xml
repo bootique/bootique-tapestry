@@ -24,7 +24,7 @@
 	<parent>
 		<groupId>io.bootique.modules.parent</groupId>
 		<artifactId>bootique-modules-parent</artifactId>
-		<version>0.11</version>
+		<version>0.12</version>
 	</parent>
 
 	<groupId>io.bootique.tapestry</groupId>
@@ -156,26 +156,8 @@
 					<plugin>
 						<groupId>org.apache.rat</groupId>
 						<artifactId>apache-rat-plugin</artifactId>
-						<version>0.12</version>
-						<executions>
-							<execution>
-								<phase>verify</phase>
-								<goals>
-									<goal>check</goal>
-								</goals>
-							</execution>
-						</executions>
 						<configuration>
-							<excludes combine.children="append">
-								<!-- This block will be moved to the modules parent module.
-                                     It can't be moved now because of fail of some depended modules.-->
-								<exclude>**/RELEASE-NOTES.md</exclude>
-								<exclude>**/LICENSE</exclude>
-								<exclude>**/META-INF/services/</exclude>
-								<exclude>**/NOTICES</exclude>
-								<exclude>**/.gitignore</exclude>
-
-								<!-- This block is specific for this package. -->
+							<excludes>
 								<exclude>src/test/resources/**/*.tml</exclude>
 								<exclude>src/test/resources/**/*.html</exclude>
 								<exclude>build/**</exclude>
