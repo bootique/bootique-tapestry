@@ -18,7 +18,7 @@
   -->
 
 [![Build Status](https://travis-ci.org/bootique/bootique-tapestry.svg)](https://travis-ci.org/bootique/bootique-tapestry)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.bootique.tapestry/bootique-tapestry/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.bootique.tapestry/bootique-tapestry/)
+[![Maven Central](https://img.shields.io/maven-central/v/io.bootique.tapestry/bootique-tapestry.svg?colorB=brightgreen)](https://search.maven.org/artifact/io.bootique.tapestry/bootique-tapestry/)
 
 # bootique-tapestry
 Provides [Apache Tapestry](http://tapestry.apache.org/) integration with [Bootique](http://bootique.io).
