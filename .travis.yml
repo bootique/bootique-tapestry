@@ -23,6 +23,7 @@ jdk:
 matrix:
   allow_failures:
     - jdk: oraclejdk11
+    - jdk: openjdk-ea
 
 script:
   - mvn clean verify
