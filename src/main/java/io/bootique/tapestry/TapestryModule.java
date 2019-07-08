@@ -75,13 +75,12 @@ public class TapestryModule extends ConfigModule {
     @Singleton
     @Provides
     MappedFilter<BQTapestryFilter> createTapestryFilter(
-            ConfigurationFactory configurationFactory,
+            ConfigurationFactory configFactory,
             Injector injector,
             @Symbols Map<String, String> diSymbols,
             @TapestryModuleBinding Set<Class<?>> moduleTypes) {
 
-        return configurationFactory
-                .config(BQTapestryFilterFactory.class, configPrefix)
+        return config(BQTapestryFilterFactory.class, configFactory)
                 .createTapestryFilter(injector, diSymbols, moduleTypes);
     }
 }
