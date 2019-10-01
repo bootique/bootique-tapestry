@@ -28,11 +28,11 @@
 	</parent>
 
 	<groupId>io.bootique.tapestry</groupId>
-	<artifactId>bootique-tapestry</artifactId>
+	<artifactId>bootique-tapestry-parent</artifactId>
 	<version>1.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
-	<name>bootique-tapestry: Apache Tapestry Integration for Bootique</name>
+	<name>bootique-tapestry-parent: Parent of Apache Tapestry Integrations for Bootique</name>
 	<description>
 		Provides Apache Tapestry Integration with Bootique.
 	</description>
@@ -42,6 +42,10 @@
 		<tapestry.version>5.4.5</tapestry.version>
 		<hk2.version>2.5.0-b61</hk2.version>
 	</properties>
+
+	<modules>
+		<module>bootique-tapestry</module>
+	</modules>
 
 	<scm>
         <developerConnection>scm:git:ssh://git@github.com/bootique/bootique-tapestry</developerConnection>
@@ -74,12 +78,6 @@
 				<artifactId>bootique-jetty</artifactId>
 				<version>${bootique.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>org.apache.tapestry</groupId>
-				<artifactId>tapestry-core</artifactId>
-				<version>${tapestry.version}</version>
-			</dependency>
-
 			<dependency>
 				<groupId>org.glassfish.jersey.inject</groupId>
 				<artifactId>jersey-hk2</artifactId>
@@ -127,22 +125,6 @@
 	</dependencyManagement>
 
 	<dependencies>
-		<!-- Compile dependencies -->
-		<dependency>
-			<groupId>io.bootique</groupId>
-			<artifactId>bootique</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.bootique.jetty</groupId>
-			<artifactId>bootique-jetty</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tapestry</groupId>
-			<artifactId>tapestry-core</artifactId>
-			<scope>compile</scope>
-		</dependency>
 
 		<!-- Unit test dependencies -->
 		<dependency>
