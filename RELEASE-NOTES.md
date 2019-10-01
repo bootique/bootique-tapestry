@@ -1,3 +1,9 @@
+## 1.1
+
+* #18 Upgrade to Tapestry 5.4.5 
+
+## 1.0
+
 ## 1.0.RC1
 
 * #15 Cleaning up APIs deprecated since <= 0.25
