@@ -1,6 +1,7 @@
 ## 1.1
 
 * #18 Upgrade to Tapestry 5.4.5 
+* #19 "bootique-tapestry55" - Tapestry 5.5 integration 
 
 ## 1.0
 

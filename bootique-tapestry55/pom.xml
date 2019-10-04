@@ -27,12 +27,12 @@
 		<version>1.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>bootique-tapestry</artifactId>
+	<artifactId>bootique-tapestry55</artifactId>
 	<packaging>jar</packaging>
 
-	<name>bootique-tapestry: Apache Tapestry 5.4.x Integration for Bootique</name>
+	<name>bootique-tapestry55: Apache Tapestry 5.5.x Integration for Bootique</name>
 	<description>
-		Provides Apache Tapestry 5.4.x Integration with Bootique. Compatible with Java up to 1.8
+		Provides Apache Tapestry 5.5.x Integration with Bootique.
 	</description>
 
 	<dependencyManagement>
@@ -40,7 +40,7 @@
 			<dependency>
 				<groupId>org.apache.tapestry</groupId>
 				<artifactId>tapestry-core</artifactId>
-				<version>${tapestry54.version}</version>
+				<version>${tapestry55.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
