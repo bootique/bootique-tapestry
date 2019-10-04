@@ -13,13 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+dist: xenial
 language: java
 
 jobs:
   include:
     - jdk: openjdk8
       script: mvn clean verify
-    - jdk: oraclejdk11
+    - jdk: openjdk11
       script: mvn clean verify -Dt54.skip.tests=true
     - stage: deploy
       jdk: openjdk8
