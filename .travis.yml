@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+dist: bionic
 language: java
 
 jobs:
@@ -20,8 +21,6 @@ jobs:
     - jdk: openjdk8
       script: mvn clean verify
     - jdk: oraclejdk11
-      script: mvn clean verify -Dt54.skip.tests=true
-    - jdk: openjdk-ea
       script: mvn clean verify -Dt54.skip.tests=true
     - stage: deploy
       jdk: openjdk8
