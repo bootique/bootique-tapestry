@@ -15,17 +15,15 @@
 
 language: java
 
+
 matrix:
   include:
     - jdk: openjdk8
-      script:
-        - mvn clean verify
+      script: mvn clean verify
     - jdk: oraclejdk11
-      script:
-        - mvn clean verify -Dt54.skip.tests=true
+      script: mvn clean verify -Dt54.skip.tests=true
     - jdk: openjdk-ea
-      script:
-        - mvn clean verify -Dt54.skip.tests=true
+      script: mvn clean verify -Dt54.skip.tests=true
 
 jobs:
   include:
