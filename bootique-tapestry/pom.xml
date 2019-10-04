@@ -18,91 +18,110 @@
   under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>io.bootique.tapestry</groupId>
-		<artifactId>bootique-tapestry-parent</artifactId>
-		<version>1.1-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>io.bootique.tapestry</groupId>
+        <artifactId>bootique-tapestry-parent</artifactId>
+        <version>1.1-SNAPSHOT</version>
+    </parent>
 
-	<artifactId>bootique-tapestry</artifactId>
-	<packaging>jar</packaging>
+    <artifactId>bootique-tapestry</artifactId>
+    <packaging>jar</packaging>
 
-	<name>bootique-tapestry: Apache Tapestry 5.4.x Integration for Bootique</name>
-	<description>
-		Provides Apache Tapestry 5.4.x Integration with Bootique. Compatible with Java up to 1.8
-	</description>
+    <name>bootique-tapestry: Apache Tapestry 5.4.x Integration for Bootique</name>
+    <description>
+        Provides Apache Tapestry 5.4.x Integration with Bootique. Compatible with Java up to 1.8
+    </description>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.apache.tapestry</groupId>
-				<artifactId>tapestry-core</artifactId>
-				<version>${tapestry54.version}</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+    <properties>
+        <!-- Flipped externally to explicitly allow to build the project on Java > 8 -->
+        <t54.skip.tests>false</t54.skip.tests>
+    </properties>
 
-	<dependencies>
-		<!-- Compile dependencies -->
-		<dependency>
-			<groupId>io.bootique</groupId>
-			<artifactId>bootique</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.bootique.jetty</groupId>
-			<artifactId>bootique-jetty</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tapestry</groupId>
-			<artifactId>tapestry-core</artifactId>
-			<scope>compile</scope>
-		</dependency>
-	</dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.tapestry</groupId>
+                <artifactId>tapestry-core</artifactId>
+                <version>${tapestry54.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-	<!-- Optional profile used to sign artifacts -->
-	<profiles>
-		<profile>
-			<id>gpg</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>rat</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.rat</groupId>
-						<artifactId>apache-rat-plugin</artifactId>
-						<configuration>
-							<excludes>
-								<exclude>src/test/resources/**/*.tml</exclude>
-								<exclude>src/test/resources/**/*.html</exclude>
-								<exclude>build/**</exclude>
-							</excludes>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+    <dependencies>
+        <!-- Compile dependencies -->
+        <dependency>
+            <groupId>io.bootique</groupId>
+            <artifactId>bootique</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.bootique.jetty</groupId>
+            <artifactId>bootique-jetty</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tapestry</groupId>
+            <artifactId>tapestry-core</artifactId>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Skip integration tests when a property explicitly tells us to. This allows to
+             explicitly decide to build T54 module on java > 8 without failures. -->
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <skipITs>${t54.skip.tests}</skipITs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- Optional profile used to sign artifacts -->
+    <profiles>
+        <profile>
+            <id>gpg</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>rat</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.rat</groupId>
+                        <artifactId>apache-rat-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>src/test/resources/**/*.tml</exclude>
+                                <exclude>src/test/resources/**/*.html</exclude>
+                                <exclude>build/**</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
