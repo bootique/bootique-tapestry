@@ -19,9 +19,9 @@
 
 package io.bootique.tapestry.di;
 
-import com.google.inject.Injector;
-import com.google.inject.Key;
-import com.google.inject.TypeLiteral;
+import io.bootique.di.Injector;
+import io.bootique.di.Key;
+import io.bootique.di.TypeLiteral;
 import io.bootique.tapestry.annotation.IgnoredPaths;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
@@ -33,7 +33,7 @@ import java.util.Set;
 /**
  * A Tapestry DI Module that provides integration with Guice DI.
  */
-public class GuiceTapestryModule {
+public class BqTapestryModule {
 
     public static void contributeIgnoredPathsFilter(
             @InjectService(InjectorModuleDef.INJECTOR_SERVICE_ID) Injector injector,
@@ -49,7 +49,7 @@ public class GuiceTapestryModule {
             @InjectService(InjectorModuleDef.INJECTOR_SERVICE_ID) Injector injector,
             OrderedConfiguration configuration) {
 
-        configuration.add("guiceProvider", new GuiceObjectProvider(injector), "after:Service,Alias,Autobuild");
+        configuration.add("guiceProvider", new BqObjectProvider(injector), "after:Service,Alias,Autobuild");
     }
 
     public void contributeComponentClassResolver(

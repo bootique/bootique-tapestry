@@ -19,8 +19,7 @@
 
 package io.bootique.tapestry.di;
 
-
-import com.google.inject.Injector;
+import io.bootique.di.Injector;
 import org.apache.tapestry5.ioc.ObjectCreator;
 import org.apache.tapestry5.ioc.ScopeConstants;
 import org.apache.tapestry5.ioc.ServiceBuilderResources;

@@ -19,7 +19,7 @@
 
 package io.bootique.tapestry.di;
 
-import com.google.inject.Injector;
+import io.bootique.di.Injector;
 import org.apache.tapestry5.ioc.def.ContributionDef;
 import org.apache.tapestry5.ioc.def.DecoratorDef;
 import org.apache.tapestry5.ioc.def.ModuleDef;

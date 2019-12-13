@@ -19,10 +19,10 @@
 
 package io.bootique.tapestry.testapp2.bq;
 
-import com.google.inject.Binder;
-import com.google.inject.Module;
+import io.bootique.di.Binder;
+import io.bootique.di.BQModule;
 
-public class TestApp2BootiqueModule implements Module {
+public class TestApp2BootiqueModule implements BQModule {
 
     @Override
     public void configure(Binder binder) {

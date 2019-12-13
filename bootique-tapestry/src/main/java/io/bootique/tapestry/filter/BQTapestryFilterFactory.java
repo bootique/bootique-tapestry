@@ -19,9 +19,9 @@
 
 package io.bootique.tapestry.filter;
 
-import com.google.inject.Injector;
 import io.bootique.annotation.BQConfig;
 import io.bootique.annotation.BQConfigProperty;
+import io.bootique.di.Injector;
 import io.bootique.jetty.MappedFilter;
 import io.bootique.tapestry.di.InjectorModuleDef;
 import org.apache.tapestry5.SymbolConstants;

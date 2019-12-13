@@ -19,20 +19,19 @@
 
 package io.bootique.tapestry;
 
-import com.google.inject.Binder;
-import com.google.inject.Injector;
-import com.google.inject.Provides;
-import com.google.inject.Singleton;
-import com.google.inject.TypeLiteral;
 import io.bootique.BQCoreModule;
 import io.bootique.ConfigModule;
 import io.bootique.config.ConfigurationFactory;
+import io.bootique.di.Binder;
+import io.bootique.di.Injector;
+import io.bootique.di.Provides;
+import io.bootique.di.TypeLiteral;
 import io.bootique.jetty.JettyModule;
 import io.bootique.jetty.MappedFilter;
 import io.bootique.jetty.servlet.ServletEnvironment;
 import io.bootique.tapestry.annotation.Symbols;
 import io.bootique.tapestry.annotation.TapestryModuleBinding;
-import io.bootique.tapestry.di.GuiceTapestryModule;
+import io.bootique.tapestry.di.BqTapestryModule;
 import io.bootique.tapestry.env.TapestryEnvironment;
 import io.bootique.tapestry.env.TapestryServletEnvironment;
 import io.bootique.tapestry.filter.BQTapestryFilter;
@@ -41,6 +40,7 @@ import io.bootique.tapestry.filter.BQTapestryFilterFactory;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
+import javax.inject.Singleton;
 
 public class TapestryModule extends ConfigModule {
 
@@ -55,7 +55,7 @@ public class TapestryModule extends ConfigModule {
 
     @Override
     public void configure(Binder binder) {
-        TapestryModule.extend(binder).initAllExtensions().addTapestryModule(GuiceTapestryModule.class);
+        TapestryModule.extend(binder).initAllExtensions().addTapestryModule(BqTapestryModule.class);
         TypeLiteral<MappedFilter<BQTapestryFilter>> tf = new TypeLiteral<MappedFilter<BQTapestryFilter>>() {
         };
         JettyModule.extend(binder).addMappedFilter(tf);

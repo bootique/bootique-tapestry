@@ -17,42 +17,31 @@
  * under the License.
  */
 
-package io.bootique.tapestry.di;
+package io.bootique.tapestry.v55.di;
 
-import com.google.inject.Binding;
-import com.google.inject.Injector;
-import com.google.inject.Key;
-import com.google.inject.TypeLiteral;
+import io.bootique.di.Injector;
+import io.bootique.di.Key;
 import org.apache.tapestry5.ioc.AnnotationProvider;
 import org.apache.tapestry5.ioc.ObjectLocator;
 import org.apache.tapestry5.ioc.ObjectProvider;
 
 import java.lang.annotation.Annotation;
-import java.util.List;
 
-public class GuiceObjectProvider implements ObjectProvider {
+public class BqObjectProvider implements ObjectProvider {
 
     private Injector injector;
 
-    public GuiceObjectProvider(Injector injector) {
+    public BqObjectProvider(Injector injector) {
         this.injector = injector;
     }
 
     @Override
     public <T> T provide(Class<T> objectType, AnnotationProvider annotationProvider, ObjectLocator locator) {
-
-        TypeLiteral<T> type = TypeLiteral.get(objectType);
-        List<Binding<T>> bindings = injector.findBindingsByType(type);
-
-        for (Binding<T> binding : bindings) {
-
-            Class<? extends Annotation> annotationType = binding.getKey().getAnnotationType();
+        for(Key<? extends T> key : injector.getKeysByType(objectType)) {
+            Class<? extends Annotation> annotationType = key.getBindingAnnotation();
             Annotation annotation = annotationType != null ? annotationProvider.getAnnotation(annotationType) : null;
-
-            Key<T> key = annotation != null ? Key.get(type, annotation) : Key.get(type);
-            if (key.equals(binding.getKey())) {
-                return injector.getInstance(key);
-            }
+            Key<? extends T> qualifiedKey = annotation != null ?  Key.get(objectType, annotation) : key;
+            return injector.getInstance(qualifiedKey);
         }
 
         return null;

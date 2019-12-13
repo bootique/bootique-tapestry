@@ -19,12 +19,12 @@
 
 package io.bootique.tapestry;
 
-import com.google.inject.Binder;
-import com.google.inject.Key;
-import com.google.inject.TypeLiteral;
-import com.google.inject.multibindings.MapBinder;
-import com.google.inject.multibindings.Multibinder;
 import io.bootique.ModuleExtender;
+import io.bootique.di.Binder;
+import io.bootique.di.Key;
+import io.bootique.di.MapBuilder;
+import io.bootique.di.SetBuilder;
+import io.bootique.di.TypeLiteral;
 import io.bootique.tapestry.annotation.IgnoredPaths;
 import io.bootique.tapestry.annotation.Symbols;
 import io.bootique.tapestry.annotation.TapestryModuleBinding;
@@ -35,10 +35,10 @@ import org.apache.tapestry5.services.LibraryMapping;
  */
 public class TapestryModuleExtender extends ModuleExtender<TapestryModuleExtender> {
 
-    private MapBinder<String, String> symbols;
-    private Multibinder<LibraryMapping> libraries;
-    private Multibinder<Class<?>> modules;
-    private Multibinder<String> ignoredPaths;
+    private MapBuilder<String, String> symbols;
+    private SetBuilder<LibraryMapping> libraries;
+    private SetBuilder<Class<?>> modules;
+    private SetBuilder<String> ignoredPaths;
 
     public TapestryModuleExtender(Binder binder) {
         super(binder);
@@ -61,34 +61,34 @@ public class TapestryModuleExtender extends ModuleExtender<TapestryModuleExtende
      * @see org.apache.tapestry5.internal.InternalConstants
      */
     public TapestryModuleExtender setSymbol(String name, String value) {
-        contributeSymbols().addBinding(name).toInstance(value);
+        contributeSymbols().put(name, value);
         return this;
     }
 
     public TapestryModuleExtender addLibraryMapping(LibraryMapping libraryMapping) {
-        contributeLibraries().addBinding().toInstance(libraryMapping);
+        contributeLibraries().add(libraryMapping);
         return this;
     }
 
     public TapestryModuleExtender addTapestryModule(Class<?> moduleType) {
-        contributeModules().addBinding().toInstance(moduleType);
+        contributeModules().add(moduleType);
         return this;
     }
 
     public TapestryModuleExtender addIgnoredPath(String ignoredPath) {
-        contributeIgnoredPaths().addBinding().toInstance(ignoredPath);
+        contributeIgnoredPaths().add(ignoredPath);
         return this;
     }
 
-    protected MapBinder<String, String> contributeSymbols() {
+    protected MapBuilder<String, String> contributeSymbols() {
         return symbols != null ? symbols : (symbols = newMap(String.class, String.class, Symbols.class));
     }
 
-    protected Multibinder<LibraryMapping> contributeLibraries() {
+    protected SetBuilder<LibraryMapping> contributeLibraries() {
         return libraries != null ? libraries : (libraries = newSet(LibraryMapping.class));
     }
 
-    protected Multibinder<Class<?>> contributeModules() {
+    protected SetBuilder<Class<?>> contributeModules() {
 
         if (modules == null) {
 
@@ -100,7 +100,7 @@ public class TapestryModuleExtender extends ModuleExtender<TapestryModuleExtende
         return modules;
     }
 
-    protected Multibinder<String> contributeIgnoredPaths() {
+    protected SetBuilder<String> contributeIgnoredPaths() {
         return ignoredPaths != null ? ignoredPaths : (ignoredPaths = newSet(String.class, IgnoredPaths.class));
     }
 }

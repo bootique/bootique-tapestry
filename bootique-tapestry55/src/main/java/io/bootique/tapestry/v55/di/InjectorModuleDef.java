@@ -19,7 +19,7 @@
 
 package io.bootique.tapestry.v55.di;
 
-import com.google.inject.Injector;
+import io.bootique.di.Injector;
 import org.apache.tapestry5.ioc.def.ContributionDef;
 import org.apache.tapestry5.ioc.def.DecoratorDef;
 import org.apache.tapestry5.ioc.def.ModuleDef;
@@ -35,7 +35,6 @@ public class InjectorModuleDef implements ModuleDef {
     private static final Logger LOGGER = LoggerFactory.getLogger(InjectorModuleDef.class);
 
     static final String INJECTOR_SERVICE_ID = "BootiqueGuiceInjector";
-
 
     private ServiceDef injectorServiceDef;
 
