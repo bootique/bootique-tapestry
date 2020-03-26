@@ -1,3 +1,7 @@
+## 2.0
+
+* #20 Upgrade "bootique-tapestry55" to the final 5.5.0 version
+
 ## 1.1
 
 * #16 JDK9-11 Compatibility 
