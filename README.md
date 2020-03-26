@@ -34,16 +34,18 @@ Add the module to your Bootique app:
         <dependency>
             <groupId>io.bootique.bom</groupId>
             <artifactId>bootique-bom</artifactId>
-            <version>1.0</version>
+            <version>1.1</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
     </dependencies>
 </dependencyManagement>
 ...
+<!-- Note that "bootique-tapestry" module bundles older Tapestry 5.4. 
+     We recommend using "bootique-tapestry55" -->
 <dependency>
     <groupId>io.bootique.tapestry</groupId>
-    <artifactId>bootique-tapestry</artifactId>
+    <artifactId>bootique-tapestry55</artifactId>
 </dependency>
 ```
 
