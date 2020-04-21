@@ -41,7 +41,6 @@
 		<bootique.version>${project.version}</bootique.version>
 		<tapestry54.version>5.4.5</tapestry54.version>
 		<tapestry55.version>5.5.0</tapestry55.version>
-		<hk2.version>2.5.0-b61</hk2.version>
 	</properties>
 
 	<modules>
