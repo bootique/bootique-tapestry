@@ -40,7 +40,7 @@ public class GuiceObjectProviderIT {
     @Test
     public void testInjectInT5_GuiceSingleton() {
         BQRuntime runtime = app.app("-s")
-                .module(new TapestryModuleProvider())
+                .moduleProvider(new TapestryModuleProvider())
                 .module(b -> TapestryModule.extend(b).addTapestryModule(T1Module.class))
                 .property("bq.tapestry.appPackage", "no.such.package")
                 .createRuntime();

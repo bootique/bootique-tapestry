@@ -46,7 +46,7 @@ public class TapestryModuleIT {
     @Test
     public void testPageRender_Index() {
         app.app("-s")
-                .module(new TapestryModuleProvider())
+                .moduleProvider(new TapestryModuleProvider())
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.v55.testapp1")
                 .run();
 
@@ -56,7 +56,7 @@ public class TapestryModuleIT {
     @Test
     public void testPageRender_Page2() {
         app.app("-s")
-                .module(new TapestryModuleProvider())
+                .moduleProvider(new TapestryModuleProvider())
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.v55.testapp1")
                 .run();
 
@@ -66,7 +66,7 @@ public class TapestryModuleIT {
     @Test
     public void testPageRender_T5_Injection() {
         app.app("-s")
-                .module(new TapestryModuleProvider())
+                .moduleProvider(new TapestryModuleProvider())
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.v55.testapp2")
                 .property("bq.tapestry.name", "testapp2")
                 .run();
@@ -77,7 +77,7 @@ public class TapestryModuleIT {
     @Test
     public void testPageRender_T5_BQInjection() {
         app.app("-s")
-                .module(new TapestryModuleProvider())
+                .moduleProvider(new TapestryModuleProvider())
                 .modules(TestApp2BootiqueModule.class)
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.v55.testapp2")
                 .property("bq.tapestry.name", "testapp2")
@@ -89,7 +89,7 @@ public class TapestryModuleIT {
     @Test
     public void testPageRender_T5_BQInjection_Annotations() {
         app.app("-s", "testarg", "testarg2")
-                .module(new TapestryModuleProvider())
+                .moduleProvider(new TapestryModuleProvider())
                 .modules(TestApp2BootiqueModule.class)
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.v55.testapp2")
                 .property("bq.tapestry.name", "testapp2")
@@ -101,7 +101,7 @@ public class TapestryModuleIT {
     @Test
     public void testPageRender_LibComponent() {
         app.app("-s")
-                .module(new TapestryModuleProvider())
+                .moduleProvider(new TapestryModuleProvider())
                 .module(b -> TapestryModule.extend(b)
                         .addLibraryMapping(new LibraryMapping("lib", "io.bootique.tapestry.v55.testlib1")))
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.v55.testapp2")
