@@ -29,6 +29,8 @@ import org.apache.tapestry5.internal.InternalConstants;
 import org.apache.tapestry5.ioc.def.ModuleDef;
 import org.apache.tapestry5.ioc.internal.services.MapSymbolProvider;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -37,6 +39,8 @@ import java.util.Set;
 
 @BQConfig
 public class BQTapestryFilterFactory {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(BQTapestryFilterFactory.class);
 
     protected String urlPattern;
     protected int filterOrder;
@@ -139,7 +143,7 @@ public class BQTapestryFilterFactory {
         } else {
             // sanity check
             if (!params.containsKey(InternalConstants.TAPESTRY_APP_PACKAGE_PARAM)) {
-                throw new IllegalStateException("Tapestry app package is not defined. Use 'tapestry.appPackage' config " +
+                LOGGER.warn("Tapestry app package is not defined. Use 'tapestry.appPackage' config " +
                         "or inject 'tapestry.app-package' symbol with this value.");
             }
         }
