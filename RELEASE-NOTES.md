@@ -1,4 +1,4 @@
-## 2.0
+## 2.0.M1
 
 * #20 Upgrade "bootique-tapestry55" to the final 5.5.0 version
 * #22  Allow configuration-free start 
