@@ -61,22 +61,22 @@ public class TapestryModuleExtender extends ModuleExtender<TapestryModuleExtende
      * @see org.apache.tapestry5.internal.InternalConstants
      */
     public TapestryModuleExtender setSymbol(String name, String value) {
-        contributeSymbols().put(name, value);
+        contributeSymbols().putInstance(name, value);
         return this;
     }
 
     public TapestryModuleExtender addLibraryMapping(LibraryMapping libraryMapping) {
-        contributeLibraries().add(libraryMapping);
+        contributeLibraries().addInstance(libraryMapping);
         return this;
     }
 
     public TapestryModuleExtender addTapestryModule(Class<?> moduleType) {
-        contributeModules().add(moduleType);
+        contributeModules().addInstance(moduleType);
         return this;
     }
 
     public TapestryModuleExtender addIgnoredPath(String ignoredPath) {
-        contributeIgnoredPaths().add(ignoredPath);
+        contributeIgnoredPaths().addInstance(ignoredPath);
         return this;
     }
 
