@@ -24,7 +24,7 @@
 	<parent>
 		<groupId>io.bootique.modules.parent</groupId>
 		<artifactId>bootique-modules-parent</artifactId>
-		<version>2.0.4</version>
+		<version>2.0.5</version>
 	</parent>
 
 	<groupId>io.bootique.tapestry</groupId>
@@ -53,14 +53,6 @@
         <url>https://github.com/bootique/bootique-tapestry</url>
         <tag>HEAD</tag>
     </scm>
-
-    <distributionManagement>
-        <repository>
-            <id>bintray-bootique-releases</id>
-            <name>bintray-bootique-releases</name>
-            <url>https://api.bintray.com/maven/bootique/releases/bootique-tapestry/;publish=1</url>
-        </repository>
-    </distributionManagement>
 
 	<dependencyManagement>
 		<dependencies>
