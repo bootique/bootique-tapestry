@@ -29,7 +29,9 @@ jobs:
           restore-keys: maven-${{ runner.os }}-1x
 
       - name: Build and test...
-        run: mvn clean verify
+        env:
+          SKIP_TAPESTRY_54_TESTS: ${{ matrix.java != 8 }}
+        run: mvn clean verify -Dt54.skip.tests=$SKIP_TAPESTRY_54_TESTS
 
   deploy:
     needs: build
