@@ -17,7 +17,7 @@
      under the License.
   -->
 
-[![Build Status](https://travis-ci.org/bootique/bootique-tapestry.svg)](https://travis-ci.org/bootique/bootique-tapestry)
+[![build test deploy 1.x](https://github.com/bootique/bootique-tapestry/actions/workflows/maven-1x.yml/badge.svg)](https://github.com/bootique/bootique-tapestry/actions/workflows/maven-1x.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/io.bootique.tapestry/bootique-tapestry.svg?colorB=brightgreen)](https://search.maven.org/artifact/io.bootique.tapestry/bootique-tapestry/)
 
 # bootique-tapestry
