@@ -17,13 +17,13 @@
  * under the License.
  */
 
-package io.bootique.tapestry.di;
+package io.bootique.tapestry.v55.di;
 
 import io.bootique.BQRuntime;
 import io.bootique.meta.application.ApplicationMetadata;
-import io.bootique.tapestry.TapestryModule;
-import io.bootique.tapestry.TapestryModuleProvider;
-import io.bootique.tapestry.env.TapestryEnvironment;
+import io.bootique.tapestry.v55.TapestryModule;
+import io.bootique.tapestry.v55.TapestryModuleProvider;
+import io.bootique.tapestry.v55.env.TapestryEnvironment;
 import io.bootique.test.junit.BQTestFactory;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -32,13 +32,13 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 
-public class GuiceObjectProviderIT {
+public class BqObjectProviderIT {
 
     @Rule
     public BQTestFactory app = new BQTestFactory();
 
     @Test
-    public void testInjectInT5_GuiceSingleton() {
+    public void testInjectInT5_BqSingleton() {
         BQRuntime runtime = app.app("-s")
                 .moduleProvider(new TapestryModuleProvider())
                 .module(b -> TapestryModule.extend(b).addTapestryModule(T1Module.class))

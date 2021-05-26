@@ -37,17 +37,16 @@ import io.bootique.tapestry.env.TapestryServletEnvironment;
 import io.bootique.tapestry.filter.BQTapestryFilter;
 import io.bootique.tapestry.filter.BQTapestryFilterFactory;
 
+import javax.inject.Singleton;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
-import javax.inject.Singleton;
 
 public class TapestryModule extends ConfigModule {
 
     /**
      * @param binder DI binder passed to the Module that invokes this method.
      * @return an instance of {@link TapestryModuleExtender} that can be used to load Tapestry custom extensions.
-     * @since 0.5
      */
     public static TapestryModuleExtender extend(Binder binder) {
         return new TapestryModuleExtender(binder);

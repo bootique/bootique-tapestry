@@ -31,23 +31,22 @@ import io.bootique.jetty.MappedFilter;
 import io.bootique.jetty.servlet.ServletEnvironment;
 import io.bootique.tapestry.v55.annotation.Symbols;
 import io.bootique.tapestry.v55.annotation.TapestryModuleBinding;
-import io.bootique.tapestry.v55.di.GuiceTapestryModule;
+import io.bootique.tapestry.v55.di.BqTapestryModule;
 import io.bootique.tapestry.v55.env.TapestryEnvironment;
 import io.bootique.tapestry.v55.env.TapestryServletEnvironment;
 import io.bootique.tapestry.v55.filter.BQTapestryFilter;
 import io.bootique.tapestry.v55.filter.BQTapestryFilterFactory;
 
+import javax.inject.Singleton;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
-import javax.inject.Singleton;
 
 public class TapestryModule extends ConfigModule {
 
     /**
      * @param binder DI binder passed to the Module that invokes this method.
      * @return an instance of {@link TapestryModuleExtender} that can be used to load Tapestry custom extensions.
-     * @since 0.5
      */
     public static TapestryModuleExtender extend(Binder binder) {
         return new TapestryModuleExtender(binder);
@@ -55,7 +54,7 @@ public class TapestryModule extends ConfigModule {
 
     @Override
     public void configure(Binder binder) {
-        TapestryModule.extend(binder).initAllExtensions().addTapestryModule(GuiceTapestryModule.class);
+        TapestryModule.extend(binder).initAllExtensions().addTapestryModule(BqTapestryModule.class);
         TypeLiteral<MappedFilter<BQTapestryFilter>> tf = new TypeLiteral<MappedFilter<BQTapestryFilter>>() {
         };
         JettyModule.extend(binder).addMappedFilter(tf);

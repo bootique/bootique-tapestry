@@ -24,16 +24,13 @@ import org.apache.tapestry5.ioc.def.ContributionDef;
 import org.apache.tapestry5.ioc.def.DecoratorDef;
 import org.apache.tapestry5.ioc.def.ModuleDef;
 import org.apache.tapestry5.ioc.def.ServiceDef;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.Set;
 
 public class InjectorModuleDef implements ModuleDef {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(InjectorModuleDef.class);
-
+    // TODO: Guice?
     static final String INJECTOR_SERVICE_ID = "BootiqueGuiceInjector";
 
     private ServiceDef injectorServiceDef;

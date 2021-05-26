@@ -31,7 +31,7 @@ import org.apache.tapestry5.services.LibraryMapping;
 import java.util.Set;
 
 /**
- * A Tapestry DI Module that provides integration with Guice DI.
+ * A Tapestry DI Module that provides integration with Bootique DI.
  */
 public class BqTapestryModule {
 
@@ -49,6 +49,7 @@ public class BqTapestryModule {
             @InjectService(InjectorModuleDef.INJECTOR_SERVICE_ID) Injector injector,
             OrderedConfiguration configuration) {
 
+        // TODO: Guice?
         configuration.add("guiceProvider", new BqObjectProvider(injector), "after:Service,Alias,Autobuild");
     }
 

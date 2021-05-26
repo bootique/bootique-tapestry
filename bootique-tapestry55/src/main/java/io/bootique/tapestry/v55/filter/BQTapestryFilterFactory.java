@@ -116,9 +116,9 @@ public class BQTapestryFilterFactory {
     }
 
     protected ModuleDef[] extraModuleDefs(Injector injector) {
-        ModuleDef guiceBridge = new InjectorModuleDef(injector);
+        ModuleDef bqBridge = new InjectorModuleDef(injector);
 
-        return new ModuleDef[]{guiceBridge};
+        return new ModuleDef[]{bqBridge};
     }
 
     protected SymbolProvider createSymbolProvider(Map<String, String> diSymbols) {

@@ -31,9 +31,9 @@ import org.apache.tapestry5.services.LibraryMapping;
 import java.util.Set;
 
 /**
- * A Tapestry DI Module that provides integration with Guice DI.
+ * A Tapestry DI Module that provides integration with Bootique DI.
  */
-public class GuiceTapestryModule {
+public class BqTapestryModule {
 
     public static void contributeIgnoredPathsFilter(
             @InjectService(InjectorModuleDef.INJECTOR_SERVICE_ID) Injector injector,

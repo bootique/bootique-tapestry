@@ -25,9 +25,6 @@ import org.apache.tapestry5.ioc.Registry;
 
 import java.util.Optional;
 
-/**
- * @since 0.7
- */
 public class TapestryServletEnvironment implements TapestryEnvironment {
 
     private ServletEnvironment servletEnvironment;

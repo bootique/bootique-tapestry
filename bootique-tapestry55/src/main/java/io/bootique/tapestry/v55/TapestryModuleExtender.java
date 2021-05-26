@@ -30,9 +30,6 @@ import io.bootique.tapestry.v55.annotation.Symbols;
 import io.bootique.tapestry.v55.annotation.TapestryModuleBinding;
 import org.apache.tapestry5.services.LibraryMapping;
 
-/**
- * @since 0.5
- */
 public class TapestryModuleExtender extends ModuleExtender<TapestryModuleExtender> {
 
     private MapBuilder<String, String> symbols;
