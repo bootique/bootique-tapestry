@@ -21,18 +21,16 @@ package io.bootique.tapestry;
 
 import io.bootique.BQRuntime;
 import io.bootique.jetty.JettyModule;
+import io.bootique.junit5.*;
 import io.bootique.tapestry.v55.TapestryModule;
 import io.bootique.tapestry.v55.TapestryModuleProvider;
-import io.bootique.test.junit.BQModuleProviderChecker;
-import io.bootique.test.junit.BQRuntimeChecker;
-import io.bootique.test.junit.BQTestFactory;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
+@BQTest
 public class TapestryModuleProviderTest {
 
-    @Rule
-    public BQTestFactory testFactory = new BQTestFactory();
+    @BQTestTool
+    final BQTestFactory testFactory = new BQTestFactory();
 
     @Test
     public void testAutoLoadable() {

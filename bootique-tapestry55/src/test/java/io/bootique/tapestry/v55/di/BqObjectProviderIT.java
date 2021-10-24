@@ -20,22 +20,24 @@
 package io.bootique.tapestry.v55.di;
 
 import io.bootique.BQRuntime;
+import io.bootique.junit5.BQTest;
+import io.bootique.junit5.BQTestFactory;
+import io.bootique.junit5.BQTestTool;
 import io.bootique.meta.application.ApplicationMetadata;
 import io.bootique.tapestry.v55.TapestryModule;
 import io.bootique.tapestry.v55.TapestryModuleProvider;
 import io.bootique.tapestry.v55.env.TapestryEnvironment;
-import io.bootique.test.junit.BQTestFactory;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+@BQTest
 public class BqObjectProviderIT {
 
-    @Rule
-    public BQTestFactory app = new BQTestFactory();
+    @BQTestTool
+    final BQTestFactory app = new BQTestFactory();
 
     @Test
     public void testInjectInT5_BqSingleton() {

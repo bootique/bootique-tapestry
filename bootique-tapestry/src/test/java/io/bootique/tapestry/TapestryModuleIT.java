@@ -20,31 +20,33 @@
 package io.bootique.tapestry;
 
 import io.bootique.jetty.JettyModule;
+import io.bootique.jetty.junit5.JettyTester;
+import io.bootique.junit5.BQTest;
+import io.bootique.junit5.BQTestFactory;
+import io.bootique.junit5.BQTestTool;
 import io.bootique.tapestry.testapp2.bq.TestApp2BootiqueModule;
-import io.bootique.test.junit.BQTestFactory;
 import org.apache.tapestry5.services.LibraryMapping;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@BQTest
 public class TapestryModuleIT {
 
-    private static WebTarget BASE_TARGET = ClientBuilder.newClient().target("http://127.0.0.1:8080/");
+    @BQTestTool
+    final BQTestFactory app = new BQTestFactory().autoLoadModules();
 
-    @Rule
-    public BQTestFactory app = new BQTestFactory();
+    @BQTestTool
+    final JettyTester jetty = JettyTester.create();
 
     @Test
     public void testPageRender_Index() {
         app.app("-s")
-                .moduleProvider(new TapestryModuleProvider())
+                .module(jetty.moduleReplacingConnectors())
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp1")
                 .run();
 
@@ -54,7 +56,7 @@ public class TapestryModuleIT {
     @Test
     public void testPageRender_Page2() {
         app.app("-s")
-                .moduleProvider(new TapestryModuleProvider())
+                .module(jetty.moduleReplacingConnectors())
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp1")
                 .run();
 
@@ -64,7 +66,7 @@ public class TapestryModuleIT {
     @Test
     public void testPageRender_T5_Injection() {
         app.app("-s")
-                .moduleProvider(new TapestryModuleProvider())
+                .module(jetty.moduleReplacingConnectors())
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp2")
                 .property("bq.tapestry.name", "testapp2")
                 .run();
@@ -75,7 +77,7 @@ public class TapestryModuleIT {
     @Test
     public void testPageRender_T5_BQInjection() {
         app.app("-s")
-                .moduleProvider(new TapestryModuleProvider())
+                .module(jetty.moduleReplacingConnectors())
                 .modules(TestApp2BootiqueModule.class)
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp2")
                 .property("bq.tapestry.name", "testapp2")
@@ -87,7 +89,7 @@ public class TapestryModuleIT {
     @Test
     public void testPageRender_T5_BQInjection_Annotations() {
         app.app("-s", "testarg", "testarg2")
-                .moduleProvider(new TapestryModuleProvider())
+                .module(jetty.moduleReplacingConnectors())
                 .modules(TestApp2BootiqueModule.class)
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp2")
                 .property("bq.tapestry.name", "testapp2")
@@ -99,7 +101,7 @@ public class TapestryModuleIT {
     @Test
     public void testPageRender_LibComponent() {
         app.app("-s")
-                .moduleProvider(new TapestryModuleProvider())
+                .module(jetty.moduleReplacingConnectors())
                 .module(b -> TapestryModule.extend(b)
                         .addLibraryMapping(new LibraryMapping("lib", "io.bootique.tapestry.testlib1")))
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp2")
@@ -111,8 +113,7 @@ public class TapestryModuleIT {
     @Test
     public void testIgnorePaths() {
         app.app("-s")
-                .module(JettyModule.class)
-                .module(TapestryModule.class)
+                .module(jetty.moduleReplacingConnectors())
                 .module(b -> {
                     TapestryModule.extend(b).addIgnoredPath("/ignored_by_tapestry/*");
                     JettyModule.extend(b).useDefaultServlet();
@@ -128,8 +129,7 @@ public class TapestryModuleIT {
     @Test
     public void testPageRender_T5Modules() {
         app.app("-s")
-                .module(JettyModule.class)
-                .module(TapestryModule.class)
+                .module(jetty.moduleReplacingConnectors())
                 .module(b -> TapestryModule.extend(b).addTapestryModule(TestApp3Module.class))
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.testapp3")
                 .run();
@@ -138,7 +138,7 @@ public class TapestryModuleIT {
     }
 
     private void assertHtml(String uri, String expectedTitle, String expectedBody) {
-        Response r = BASE_TARGET.path(uri).request(MediaType.TEXT_HTML).get();
+        Response r = jetty.getTarget().path(uri).request(MediaType.TEXT_HTML).get();
         assertEquals(200, r.getStatus());
 
         String html = r.readEntity(String.class);
@@ -153,7 +153,7 @@ public class TapestryModuleIT {
         assertTrue(html.startsWith("<!DOCTYPE html><html"));
         assertTrue(html.endsWith("</html>"));
 
-        assertTrue("Expected: " + expectedTitle, html.contains("<title>" + expectedTitle + "</title>"));
-        assertTrue("Unexpected html: " + html, html.contains(expectedBody));
+        assertTrue(html.contains("<title>" + expectedTitle + "</title>"), () -> "Expected: " + expectedTitle);
+        assertTrue(html.contains(expectedBody), () -> "Unexpected html: " + html);
     }
 }
