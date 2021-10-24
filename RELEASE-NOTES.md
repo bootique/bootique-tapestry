@@ -1,6 +1,6 @@
 ## 3.0.M1
 
-* #24 Remove "bootique-tapestry" module that doesn't work with Java 11
+* #24 Remove "bootique-tapestry" module (Tapestry 5.4)
 
 ## 2.0.M1
 
