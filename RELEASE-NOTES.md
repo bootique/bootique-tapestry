@@ -1,3 +1,7 @@
+## 3.0.M1
+
+* #24 Remove "bootique-tapestry" module that doesn't work with Java 11
+
 ## 2.0.M1
 
 * #20 Upgrade "bootique-tapestry55" to the final 5.5.0 version

@@ -24,7 +24,7 @@
 	<parent>
 		<groupId>io.bootique.modules.parent</groupId>
 		<artifactId>bootique-modules-parent</artifactId>
-		<version>3.0.1</version>
+		<version>3.0.3</version>
 	</parent>
 
 	<groupId>io.bootique.tapestry</groupId>
@@ -39,12 +39,10 @@
 
 	<properties>
 		<bootique.version>${project.version}</bootique.version>
-		<tapestry54.version>5.4.5</tapestry54.version>
 		<tapestry55.version>5.5.0</tapestry55.version>
 	</properties>
 
 	<modules>
-		<module>bootique-tapestry</module>
 		<module>bootique-tapestry55</module>
 	</modules>
 
