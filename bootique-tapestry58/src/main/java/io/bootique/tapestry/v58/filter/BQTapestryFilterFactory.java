@@ -25,17 +25,16 @@ import io.bootique.di.Injector;
 import io.bootique.jetty.MappedFilter;
 import io.bootique.tapestry.v58.di.InjectorModuleDef;
 import org.apache.tapestry5.SymbolConstants;
-import org.apache.tapestry5.internal.InternalConstants;
+import org.apache.tapestry5.http.TapestryHttpSymbolConstants;
+import org.apache.tapestry5.http.internal.TapestryHttpInternalConstants;
 import org.apache.tapestry5.ioc.def.ModuleDef;
 import org.apache.tapestry5.ioc.internal.services.MapSymbolProvider;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
+import org.apache.tapestry5.modules.TapestryModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @BQConfig
 public class BQTapestryFilterFactory {
@@ -47,7 +46,7 @@ public class BQTapestryFilterFactory {
 
     protected String name;
 
-    // properties from http://tapestry.apache.org/configuration.html
+    // properties from https://tapestry.apache.org/configuration.html
 
     protected Boolean productionMode;
     protected String executionModes;
@@ -106,13 +105,23 @@ public class BQTapestryFilterFactory {
     }
 
     public MappedFilter<BQTapestryFilter> createTapestryFilter(Injector injector, Map<String, String> diSymbols, Set<Class<?>> customModules) {
-        SymbolProvider symbolProvider = createSymbolProvider(diSymbols);
-        BQTapestryFilter filter = new BQTapestryFilter(name, symbolProvider, toModuleArray(customModules), extraModuleDefs(injector));
+
+        BQTapestryFilter filter = new BQTapestryFilter(
+                name,
+                createSymbolProvider(diSymbols),
+                collectModules(customModules),
+                extraModuleDefs(injector));
+
         return new MappedFilter(filter, Collections.singleton(urlPattern), name, filterOrder);
     }
 
-    protected Class[] toModuleArray(Set<Class<?>> modules) {
-        return modules.toArray(new Class[modules.size()]);
+    protected Class[] collectModules(Set<Class<?>> customModules) {
+
+        // since Tapestry 5.8 (5.7?) must explicitly add the TapestryModule
+        Set<Class<?>> allModules = new HashSet<>(customModules);
+        allModules.add(TapestryModule.class);
+
+        return allModules.toArray(new Class[0]);
     }
 
     protected ModuleDef[] extraModuleDefs(Injector injector) {
@@ -127,22 +136,22 @@ public class BQTapestryFilterFactory {
 
         // override DI symbols if set explicitly in the factory
         if (productionMode != null) {
-            params.put(SymbolConstants.PRODUCTION_MODE, Boolean.toString(productionMode));
+            params.put(TapestryHttpSymbolConstants.PRODUCTION_MODE, Boolean.toString(productionMode));
         }
 
         if (executionModes != null) {
-            params.put(SymbolConstants.EXECUTION_MODE, executionModes);
+            params.put(TapestryHttpSymbolConstants.EXECUTION_MODE, executionModes);
         }
 
         if (charset != null) {
-            params.put(SymbolConstants.CHARSET, charset);
+            params.put(TapestryHttpSymbolConstants.CHARSET, charset);
         }
 
         if (appPackage != null) {
-            params.put(InternalConstants.TAPESTRY_APP_PACKAGE_PARAM, appPackage);
+            params.put(TapestryHttpInternalConstants.TAPESTRY_APP_PACKAGE_PARAM, appPackage);
         } else {
             // sanity check
-            if (!params.containsKey(InternalConstants.TAPESTRY_APP_PACKAGE_PARAM)) {
+            if (!params.containsKey(TapestryHttpInternalConstants.TAPESTRY_APP_PACKAGE_PARAM)) {
                 LOGGER.warn("Tapestry app package is not defined. Use 'tapestry.appPackage' config " +
                         "or inject 'tapestry.app-package' symbol with this value.");
             }
@@ -153,9 +162,9 @@ public class BQTapestryFilterFactory {
         }
 
         // provide default values for symbols if not defined in DI
-        if (!params.containsKey(SymbolConstants.GZIP_COMPRESSION_ENABLED)) {
+        if (!params.containsKey(TapestryHttpSymbolConstants.GZIP_COMPRESSION_ENABLED)) {
             // compression should be configured at the Jetty level
-            params.put(SymbolConstants.GZIP_COMPRESSION_ENABLED, "false");
+            params.put(TapestryHttpSymbolConstants.GZIP_COMPRESSION_ENABLED, "false");
         }
 
         return new MapSymbolProvider(params);

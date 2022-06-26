@@ -19,26 +19,22 @@
 
 package io.bootique.tapestry.v58.filter;
 
-import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.TapestryFilter;
+import org.apache.tapestry5.http.AsyncRequestHandlerResponse;
+import org.apache.tapestry5.http.TapestryHttpSymbolConstants;
+import org.apache.tapestry5.http.internal.AsyncRequestService;
 import org.apache.tapestry5.http.internal.SingleKeySymbolProvider;
 import org.apache.tapestry5.http.internal.TapestryAppInitializer;
 import org.apache.tapestry5.http.internal.util.DelegatingSymbolProvider;
+import org.apache.tapestry5.http.services.HttpServletRequestHandler;
+import org.apache.tapestry5.http.services.ServletApplicationInitializer;
 import org.apache.tapestry5.ioc.Registry;
 import org.apache.tapestry5.ioc.def.ModuleDef;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
-import org.apache.tapestry5.http.services.HttpServletRequestHandler;
-import org.apache.tapestry5.http.services.ServletApplicationInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -60,6 +56,7 @@ public class BQTapestryFilter implements Filter {
     private ServletContext context;
     private Registry registry;
     private HttpServletRequestHandler handler;
+    private AsyncRequestService asyncRequestService;
 
     public BQTapestryFilter(String name, SymbolProvider baseSymbolProvider, Class[] extraModules, ModuleDef[] extraModuleDefs) {
         this.name = name;
@@ -72,18 +69,18 @@ public class BQTapestryFilter implements Filter {
         // merge upstream provider with defaults from ServletContext
         return new DelegatingSymbolProvider(
                 baseSymbolProvider,
-                new SingleKeySymbolProvider(SymbolConstants.CONTEXT_PATH, context.getContextPath())
+                new SingleKeySymbolProvider(TapestryHttpSymbolConstants.CONTEXT_PATH, context.getContextPath())
         );
     }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
 
         this.context = filterConfig.getServletContext();
 
         SymbolProvider contextualSymbolProvider = createSymbolProvider(context);
 
-        String executionMode = contextualSymbolProvider.valueForSymbol(SymbolConstants.EXECUTION_MODE);
+        String executionMode = contextualSymbolProvider.valueForSymbol(TapestryHttpSymbolConstants.EXECUTION_MODE);
         TapestryAppInitializer appInitializer = new TapestryAppInitializer(LOGGER, contextualSymbolProvider, name, executionMode);
 
         appInitializer.addModules(extraModules);
@@ -100,23 +97,70 @@ public class BQTapestryFilter implements Filter {
         this.registry.performRegistryStartup();
 
         this.handler = registry.getService("HttpServletRequestHandler", HttpServletRequestHandler.class);
+        this.asyncRequestService = registry.getService("AsyncRequestService", AsyncRequestService.class);
 
         appInitializer.announceStartup();
         registry.cleanupThread();
     }
 
-    @Override
-    public final void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+    protected void runFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         try {
-            boolean handled = handler.service((HttpServletRequest) request,
-                    (HttpServletResponse) response);
-
+            boolean handled = handler.service((HttpServletRequest) request, (HttpServletResponse) response);
             if (!handled) {
                 chain.doFilter(request, response);
             }
         } finally {
             registry.cleanupThread();
+        }
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+
+        AsyncRequestHandlerResponse handlerResponse = asyncRequestService.handle((HttpServletRequest) request, (HttpServletResponse) response);
+
+        if (handlerResponse.isAsync()) {
+            AsyncContext asyncContext;
+            if (handlerResponse.isHasRequestAndResponse()) {
+                asyncContext = request.startAsync(handlerResponse.getRequest(), handlerResponse.getResponse());
+            } else {
+                asyncContext = request.startAsync();
+            }
+            if (handlerResponse.getListener() != null) {
+                asyncContext.addListener(handlerResponse.getListener());
+            }
+            if (handlerResponse.getTimeout() > 0) {
+                asyncContext.setTimeout(handlerResponse.getTimeout());
+            }
+
+            handlerResponse.getExecutor().execute(
+                    new ExceptionCatchingRunnable(() -> {
+                        runFilter(request, response, chain);
+                        asyncContext.complete();
+                    }));
+        } else {
+            runFilter(request, response, chain);
+        }
+    }
+
+    private interface ExceptionRunnable {
+        void run() throws Exception;
+    }
+
+    private final class ExceptionCatchingRunnable implements Runnable {
+        private final ExceptionRunnable runnable;
+
+        public ExceptionCatchingRunnable(ExceptionRunnable runnable) {
+            this.runnable = runnable;
+        }
+
+        public void run() {
+            try {
+                runnable.run();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

@@ -48,7 +48,7 @@ public class TapestryModuleIT {
     public void testPageRender_Index() {
         app.app("-s")
                 .module(jetty.moduleReplacingConnectors())
-                .property("bq.tapestry.appPackage", "io.bootique.tapestry.v55.testapp1")
+                .property("bq.tapestry.appPackage", "io.bootique.tapestry.v58.testapp1")
                 .run();
 
         assertHtml("/", "Index", "[xyz]");
@@ -58,7 +58,7 @@ public class TapestryModuleIT {
     public void testPageRender_Page2() {
         app.app("-s")
                 .module(jetty.moduleReplacingConnectors())
-                .property("bq.tapestry.appPackage", "io.bootique.tapestry.v55.testapp1")
+                .property("bq.tapestry.appPackage", "io.bootique.tapestry.v58.testapp1")
                 .run();
 
         assertHtml("/page2", "I am wrapped", "[I am page2 body]");
@@ -68,7 +68,7 @@ public class TapestryModuleIT {
     public void testPageRender_T5_Injection() {
         app.app("-s")
                 .module(jetty.moduleReplacingConnectors())
-                .property("bq.tapestry.appPackage", "io.bootique.tapestry.v55.testapp2")
+                .property("bq.tapestry.appPackage", "io.bootique.tapestry.v58.testapp2")
                 .property("bq.tapestry.name", "testapp2")
                 .run();
 
@@ -80,7 +80,7 @@ public class TapestryModuleIT {
         app.app("-s")
                 .module(jetty.moduleReplacingConnectors())
                 .modules(TestApp2BootiqueModule.class)
-                .property("bq.tapestry.appPackage", "io.bootique.tapestry.v55.testapp2")
+                .property("bq.tapestry.appPackage", "io.bootique.tapestry.v58.testapp2")
                 .property("bq.tapestry.name", "testapp2")
                 .run();
 
@@ -92,7 +92,7 @@ public class TapestryModuleIT {
         app.app("-s", "testarg", "testarg2")
                 .module(jetty.moduleReplacingConnectors())
                 .modules(TestApp2BootiqueModule.class)
-                .property("bq.tapestry.appPackage", "io.bootique.tapestry.v55.testapp2")
+                .property("bq.tapestry.appPackage", "io.bootique.tapestry.v58.testapp2")
                 .property("bq.tapestry.name", "testapp2")
                 .run();
 
@@ -104,8 +104,8 @@ public class TapestryModuleIT {
         app.app("-s")
                 .module(jetty.moduleReplacingConnectors())
                 .module(b -> TapestryModule.extend(b)
-                        .addLibraryMapping(new LibraryMapping("lib", "io.bootique.tapestry.v55.testlib1")))
-                .property("bq.tapestry.appPackage", "io.bootique.tapestry.v55.testapp2")
+                        .addLibraryMapping(new LibraryMapping("lib", "io.bootique.tapestry.v58.testlib1")))
+                .property("bq.tapestry.appPackage", "io.bootique.tapestry.v58.testapp2")
                 .run();
 
         assertHtml("/bqpagewithlibcomponent", "Index with Lib", "<b>__val__</b>");
@@ -119,7 +119,7 @@ public class TapestryModuleIT {
                     TapestryModule.extend(b).addIgnoredPath("/ignored_by_tapestry/*");
                     JettyModule.extend(b).useDefaultServlet();
                 })
-                .property("bq.tapestry.appPackage", "io.bootique.tapestry.v55.testapp1")
+                .property("bq.tapestry.appPackage", "io.bootique.tapestry.v58.testapp1")
                 .property("bq.jetty.staticResourceBase", "classpath:docroot")
                 .run();
 
@@ -132,7 +132,7 @@ public class TapestryModuleIT {
         app.app("-s")
                 .module(jetty.moduleReplacingConnectors())
                 .module(b -> TapestryModule.extend(b).addTapestryModule(TestApp3Module.class))
-                .property("bq.tapestry.appPackage", "io.bootique.tapestry.v55.testapp3")
+                .property("bq.tapestry.appPackage", "io.bootique.tapestry.v58.testapp3")
                 .run();
 
         assertHtml("/page1", "Testapp3 Page1", ":DeferredServiceImpl:");
@@ -144,7 +144,7 @@ public class TapestryModuleIT {
 
         String html = r.readEntity(String.class);
 
-        // adding a small delay after reading the response. Otherwise container may start shutdown
+        // adding a small delay after reading the response. Otherwise, container may start shutdown
         // when T5 request is still in progress, resulting in stack traces in the logs.
         try {
             Thread.sleep(20);

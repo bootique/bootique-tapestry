@@ -1,5 +1,6 @@
 ## 3.0.M1
 
+* #23 Provide integration with T 5.8.x
 * #24 Remove "bootique-tapestry" module (Tapestry 5.4)
 
 ## 2.0.M1
