@@ -21,9 +21,9 @@ package io.bootique.tapestry.v58.di;
 
 import io.bootique.di.Injector;
 import io.bootique.di.Key;
-import org.apache.tapestry5.ioc.AnnotationProvider;
-import org.apache.tapestry5.ioc.ObjectLocator;
-import org.apache.tapestry5.ioc.ObjectProvider;
+import org.apache.tapestry5.commons.AnnotationProvider;
+import org.apache.tapestry5.commons.ObjectLocator;
+import org.apache.tapestry5.commons.ObjectProvider;
 
 import java.lang.annotation.Annotation;
 

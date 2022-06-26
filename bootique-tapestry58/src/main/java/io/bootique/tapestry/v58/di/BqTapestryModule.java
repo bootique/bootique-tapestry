@@ -23,8 +23,8 @@ import io.bootique.di.Injector;
 import io.bootique.di.Key;
 import io.bootique.di.TypeLiteral;
 import io.bootique.tapestry.v58.annotation.IgnoredPaths;
-import org.apache.tapestry5.ioc.Configuration;
-import org.apache.tapestry5.ioc.OrderedConfiguration;
+import org.apache.tapestry5.commons.Configuration;
+import org.apache.tapestry5.commons.OrderedConfiguration;
 import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.services.LibraryMapping;
 
