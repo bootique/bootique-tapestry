@@ -40,10 +40,12 @@
 	<properties>
 		<bootique.version>${project.version}</bootique.version>
 		<tapestry55.version>5.5.0</tapestry55.version>
+		<tapestry58.version>5.8.2</tapestry58.version>
 	</properties>
 
 	<modules>
 		<module>bootique-tapestry55</module>
+		<module>bootique-tapestry58</module>
 	</modules>
 
 	<scm>
