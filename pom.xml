@@ -29,7 +29,7 @@
 
 	<groupId>io.bootique.tapestry</groupId>
 	<artifactId>bootique-tapestry-parent</artifactId>
-	<version>3.0.M1-SNAPSHOT</version>
+	<version>3.0.M1</version>
 	<packaging>pom</packaging>
 
 	<name>bootique-tapestry-parent: Parent of Apache Tapestry Integrations for Bootique</name>
@@ -54,7 +54,7 @@
 	<scm>
         <developerConnection>scm:git:ssh://git@github.com/bootique/bootique-tapestry</developerConnection>
         <url>https://github.com/bootique/bootique-tapestry</url>
-        <tag>HEAD</tag>
+        <tag>3.0.M1</tag>
     </scm>
 
 	<dependencyManagement>
