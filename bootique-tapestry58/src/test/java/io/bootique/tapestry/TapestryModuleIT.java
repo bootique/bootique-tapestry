@@ -45,7 +45,7 @@ public class TapestryModuleIT {
     final JettyTester jetty = JettyTester.create();
 
     @Test
-    public void testPageRender_Index() {
+    public void pageRender_Index() {
         app.app("-s")
                 .module(jetty.moduleReplacingConnectors())
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.v58.testapp1")
@@ -55,7 +55,7 @@ public class TapestryModuleIT {
     }
 
     @Test
-    public void testPageRender_Page2() {
+    public void pageRender_Page2() {
         app.app("-s")
                 .module(jetty.moduleReplacingConnectors())
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.v58.testapp1")
@@ -65,7 +65,7 @@ public class TapestryModuleIT {
     }
 
     @Test
-    public void testPageRender_T5_Injection() {
+    public void pageRender_T5_Injection() {
         app.app("-s")
                 .module(jetty.moduleReplacingConnectors())
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.v58.testapp2")
@@ -76,7 +76,7 @@ public class TapestryModuleIT {
     }
 
     @Test
-    public void testPageRender_T5_BQInjection() {
+    public void pageRender_T5_BQInjection() {
         app.app("-s")
                 .module(jetty.moduleReplacingConnectors())
                 .modules(TestApp2BootiqueModule.class)
@@ -88,7 +88,7 @@ public class TapestryModuleIT {
     }
 
     @Test
-    public void testPageRender_T5_BQInjection_Annotations() {
+    public void pageRender_T5_BQInjection_Annotations() {
         app.app("-s", "testarg", "testarg2")
                 .module(jetty.moduleReplacingConnectors())
                 .modules(TestApp2BootiqueModule.class)
@@ -100,7 +100,7 @@ public class TapestryModuleIT {
     }
 
     @Test
-    public void testPageRender_LibComponent() {
+    public void pageRender_LibComponent() {
         app.app("-s")
                 .module(jetty.moduleReplacingConnectors())
                 .module(b -> TapestryModule.extend(b)
@@ -112,7 +112,7 @@ public class TapestryModuleIT {
     }
 
     @Test
-    public void testIgnorePaths() {
+    public void ignorePaths() {
         app.app("-s")
                 .module(jetty.moduleReplacingConnectors())
                 .module(b -> {
@@ -128,7 +128,7 @@ public class TapestryModuleIT {
     }
 
     @Test
-    public void testPageRender_T5Modules() {
+    public void pageRender_T5Modules() {
         app.app("-s")
                 .module(jetty.moduleReplacingConnectors())
                 .module(b -> TapestryModule.extend(b).addTapestryModule(TestApp3Module.class))

@@ -38,7 +38,7 @@ public class TapestryServletEnvironmentIT {
     final BQTestFactory app = new BQTestFactory().autoLoadModules();
 
     @Test
-    public void testGetRegistry_BeforeStart() {
+    public void getRegistry_BeforeStart() {
         BQRuntime runtime = app.app()
                 .property("bq.tapestry.appPackage", "no.such.package")
                 .createRuntime();
@@ -50,7 +50,7 @@ public class TapestryServletEnvironmentIT {
     }
 
     @Test
-    public void testGetRegistry() {
+    public void getRegistry() {
         BQRuntime runtime = app.app("-s")
                 .property("bq.tapestry.appPackage", "no.such.package")
                 .createRuntime();

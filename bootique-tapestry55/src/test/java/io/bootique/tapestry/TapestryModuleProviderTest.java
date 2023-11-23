@@ -33,17 +33,17 @@ public class TapestryModuleProviderTest {
     final BQTestFactory testFactory = new BQTestFactory();
 
     @Test
-    public void testAutoLoadable() {
+    public void autoLoadable() {
         BQModuleProviderChecker.testAutoLoadable(TapestryModuleProvider.class);
     }
 
     @Test
-    public void testMetadata() {
+    public void metadata() {
         BQModuleProviderChecker.testMetadata(TapestryModuleProvider.class);
     }
 
     @Test
-    public void testModuleDeclaresDependencies() {
+    public void moduleDeclaresDependencies() {
         final BQRuntime bqRuntime = testFactory.app().moduleProvider(new TapestryModuleProvider()).createRuntime();
         BQRuntimeChecker.testModulesLoaded(bqRuntime,
                 TapestryModule.class,

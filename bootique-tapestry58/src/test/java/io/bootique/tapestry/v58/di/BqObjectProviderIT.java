@@ -40,7 +40,7 @@ public class BqObjectProviderIT {
     final BQTestFactory app = new BQTestFactory();
 
     @Test
-    public void testInjectInT5_BqSingleton() {
+    public void injectInT5_BqSingleton() {
         BQRuntime runtime = app.app("-s")
                 .moduleProvider(new TapestryModuleProvider())
                 .module(b -> TapestryModule.extend(b).addTapestryModule(T1Module.class))
