@@ -19,38 +19,24 @@
 
 package io.bootique.tapestry.v58;
 
-import io.bootique.BQModuleMetadata;
 import io.bootique.BQModuleProvider;
-import io.bootique.di.BQModule;
+import io.bootique.bootstrap.BuiltModule;
 import io.bootique.jetty.JettyModuleProvider;
 import io.bootique.tapestry.v58.filter.BQTapestryFilterFactory;
 
-import java.lang.reflect.Type;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
 
 import static java.util.Collections.singletonList;
 
 public class TapestryModuleProvider implements BQModuleProvider {
 
     @Override
-    public BQModule module() {
-        return new TapestryModule();
-    }
-
-    @Override
-    public Map<String, Type> configs() {
-        // TODO: config prefix is hardcoded. Refactor away from ConfigModule, and make provider
-        // generate config prefix, reusing it in metadata...
-        return Collections.singletonMap("tapestry", BQTapestryFilterFactory.class);
-    }
-
-    @Override
-    public BQModuleMetadata.Builder moduleBuilder() {
-        return BQModuleProvider.super
-                .moduleBuilder()
-                .description("Provides integration with Apache Tapestry.");
+    public BuiltModule buildModule() {
+        return BuiltModule.of(new TapestryModule())
+                .provider(this)
+                .description("Integrates Apache Tapestry, v5.8")
+                .config("tapestry", BQTapestryFilterFactory.class)
+                .build();
     }
 
     @Override
