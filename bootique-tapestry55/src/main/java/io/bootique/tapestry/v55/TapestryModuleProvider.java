@@ -38,7 +38,7 @@ public class TapestryModuleProvider implements BQModuleProvider {
     public BuiltModule buildModule() {
         return BuiltModule.of(new TapestryModule())
                 .provider(this)
-                .description("Integrates Apache Tapestry, v5.5")
+                .description("Deprecated, can be replaced with 'bootique-tapestry58'.")
                 .config("tapestry", BQTapestryFilterFactory.class)
                 .build();
     }
