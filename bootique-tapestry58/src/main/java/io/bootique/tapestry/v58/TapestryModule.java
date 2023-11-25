@@ -20,13 +20,12 @@
 package io.bootique.tapestry.v58;
 
 import io.bootique.BQCoreModule;
-import io.bootique.ConfigModule;
+import io.bootique.BQModuleProvider;
+import io.bootique.bootstrap.BuiltModule;
 import io.bootique.config.ConfigurationFactory;
-import io.bootique.di.Binder;
-import io.bootique.di.Injector;
-import io.bootique.di.Provides;
-import io.bootique.di.TypeLiteral;
+import io.bootique.di.*;
 import io.bootique.jetty.JettyModule;
+import io.bootique.jetty.JettyModuleProvider;
 import io.bootique.jetty.MappedFilter;
 import io.bootique.jetty.servlet.ServletEnvironment;
 import io.bootique.tapestry.v58.annotation.Symbols;
@@ -38,11 +37,16 @@ import io.bootique.tapestry.v58.filter.BQTapestryFilter;
 import io.bootique.tapestry.v58.filter.BQTapestryFilterFactory;
 
 import javax.inject.Singleton;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 
-public class TapestryModule extends ConfigModule {
+import static java.util.Collections.singletonList;
+
+public class TapestryModule implements BQModule, BQModuleProvider {
+
+    private static final String CONFIG_PREFIX = "tapestry";
 
     /**
      * @param binder DI binder passed to the Module that invokes this method.
@@ -50,6 +54,23 @@ public class TapestryModule extends ConfigModule {
      */
     public static TapestryModuleExtender extend(Binder binder) {
         return new TapestryModuleExtender(binder);
+    }
+
+    @Override
+    public BuiltModule buildModule() {
+        return BuiltModule.of(new TapestryModule())
+                .provider(this)
+                .description("Integrates Apache Tapestry, v5.8")
+                .config(CONFIG_PREFIX, BQTapestryFilterFactory.class)
+                .build();
+    }
+
+    @Override
+    @Deprecated(since = "3.0", forRemoval = true)
+    public Collection<BQModuleProvider> dependencies() {
+        return singletonList(
+                new JettyModuleProvider()
+        );
     }
 
     @Override
@@ -79,7 +100,7 @@ public class TapestryModule extends ConfigModule {
             @Symbols Map<String, String> diSymbols,
             @TapestryModuleBinding Set<Class<?>> moduleTypes) {
 
-        return config(BQTapestryFilterFactory.class, configFactory)
+        return configFactory.config(BQTapestryFilterFactory.class, CONFIG_PREFIX)
                 .createTapestryFilter(injector, diSymbols, moduleTypes);
     }
 }

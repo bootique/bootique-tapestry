@@ -25,7 +25,6 @@ import io.bootique.junit5.BQTestFactory;
 import io.bootique.junit5.BQTestTool;
 import io.bootique.meta.application.ApplicationMetadata;
 import io.bootique.tapestry.v58.TapestryModule;
-import io.bootique.tapestry.v58.TapestryModuleProvider;
 import io.bootique.tapestry.v58.env.TapestryEnvironment;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -42,7 +41,7 @@ public class BqObjectProviderIT {
     @Test
     public void injectInT5_BqSingleton() {
         BQRuntime runtime = app.app("-s")
-                .moduleProvider(new TapestryModuleProvider())
+                .module(new TapestryModule())
                 .module(b -> TapestryModule.extend(b).addTapestryModule(T1Module.class))
                 .property("bq.tapestry.appPackage", "no.such.package")
                 .createRuntime();
