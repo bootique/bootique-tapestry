@@ -1,3 +1,7 @@
+## 3.0-M3
+
+* #26 Deprecate 5.5 / 5.6 modules
+
 ## 3.0.M1
 
 * #23 Provide integration with T 5.8.x

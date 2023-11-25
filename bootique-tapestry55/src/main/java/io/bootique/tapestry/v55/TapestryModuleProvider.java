@@ -28,6 +28,10 @@ import java.util.Collection;
 
 import static java.util.Collections.singletonList;
 
+/**
+ * @deprecated in favor of 5.8 (or later) modules
+ */
+@Deprecated(since = "3.0", forRemoval = true)
 public class TapestryModuleProvider implements BQModuleProvider {
 
     @Override

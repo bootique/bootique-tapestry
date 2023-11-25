@@ -25,7 +25,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })
+/**
+ * @deprecated in favor of 5.8 (or later) modules
+ */
+@Deprecated(since = "3.0", forRemoval = true)
+@Target({ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Qualifier
 public @interface IgnoredPaths {

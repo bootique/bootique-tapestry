@@ -37,6 +37,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * @deprecated in favor of 5.8 (or later) modules
+ */
+@Deprecated(since = "3.0", forRemoval = true)
 @BQConfig
 public class BQTapestryFilterFactory {
 

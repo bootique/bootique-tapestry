@@ -42,6 +42,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 
+/**
+ * @deprecated in favor of 5.8 (or later) modules
+ */
+@Deprecated(since = "3.0", forRemoval = true)
 public class TapestryModule extends ConfigModule {
 
     /**
