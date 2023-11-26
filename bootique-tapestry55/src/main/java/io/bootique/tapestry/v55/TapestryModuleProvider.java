@@ -20,7 +20,7 @@
 package io.bootique.tapestry.v55;
 
 import io.bootique.BQModuleProvider;
-import io.bootique.bootstrap.BuiltModule;
+import io.bootique.ModuleCrate;
 import io.bootique.jetty.JettyModuleProvider;
 import io.bootique.tapestry.v55.filter.BQTapestryFilterFactory;
 
@@ -35,8 +35,8 @@ import static java.util.Collections.singletonList;
 public class TapestryModuleProvider implements BQModuleProvider {
 
     @Override
-    public BuiltModule buildModule() {
-        return BuiltModule.of(new TapestryModule())
+    public ModuleCrate moduleCrate() {
+        return ModuleCrate.of(new TapestryModule())
                 .provider(this)
                 .description("Deprecated, can be replaced with 'bootique-tapestry58'.")
                 .config("tapestry", BQTapestryFilterFactory.class)

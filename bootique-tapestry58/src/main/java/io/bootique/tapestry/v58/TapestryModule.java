@@ -21,7 +21,7 @@ package io.bootique.tapestry.v58;
 
 import io.bootique.BQCoreModule;
 import io.bootique.BQModuleProvider;
-import io.bootique.bootstrap.BuiltModule;
+import io.bootique.ModuleCrate;
 import io.bootique.config.ConfigurationFactory;
 import io.bootique.di.*;
 import io.bootique.jetty.JettyModule;
@@ -57,8 +57,8 @@ public class TapestryModule implements BQModule, BQModuleProvider {
     }
 
     @Override
-    public BuiltModule buildModule() {
-        return BuiltModule.of(new TapestryModule())
+    public ModuleCrate moduleCrate() {
+        return ModuleCrate.of(new TapestryModule())
                 .provider(this)
                 .description("Integrates Apache Tapestry, v5.8")
                 .config(CONFIG_PREFIX, BQTapestryFilterFactory.class)
