@@ -36,12 +36,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class BqObjectProviderIT {
 
     @BQTestTool
-    final BQTestFactory app = new BQTestFactory();
+    final BQTestFactory app = new BQTestFactory().autoLoadModules();
 
     @Test
     public void injectInT5_BqSingleton() {
         BQRuntime runtime = app.app("-s")
-                .module(new TapestryModule())
                 .module(b -> TapestryModule.extend(b).addTapestryModule(T1Module.class))
                 .property("bq.tapestry.appPackage", "no.such.package")
                 .createRuntime();

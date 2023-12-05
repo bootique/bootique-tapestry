@@ -19,35 +19,16 @@
 
 package io.bootique.tapestry;
 
-import io.bootique.BQRuntime;
-import io.bootique.jetty.JettyModule;
-import io.bootique.junit5.*;
+import io.bootique.junit5.BQModuleTester;
+import io.bootique.junit5.BQTest;
 import io.bootique.tapestry.v55.TapestryModule;
-import io.bootique.tapestry.v55.TapestryModuleProvider;
 import org.junit.jupiter.api.Test;
 
 @BQTest
-public class TapestryModuleProviderTest {
-
-    @BQTestTool
-    final BQTestFactory testFactory = new BQTestFactory();
+public class TapestryModuleTest {
 
     @Test
-    public void autoLoadable() {
-        BQModuleProviderChecker.testAutoLoadable(TapestryModuleProvider.class);
-    }
-
-    @Test
-    public void metadata() {
-        BQModuleProviderChecker.testMetadata(TapestryModuleProvider.class);
-    }
-
-    @Test
-    public void moduleDeclaresDependencies() {
-        final BQRuntime bqRuntime = testFactory.app().moduleProvider(new TapestryModuleProvider()).createRuntime();
-        BQRuntimeChecker.testModulesLoaded(bqRuntime,
-                TapestryModule.class,
-                JettyModule.class
-        );
+    public void check() {
+        BQModuleTester.of(TapestryModule.class).testAutoLoadable().testConfig();
     }
 }

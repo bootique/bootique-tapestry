@@ -21,6 +21,7 @@ package io.bootique.tapestry.v55;
 
 import io.bootique.BQCoreModule;
 import io.bootique.ConfigModule;
+import io.bootique.ModuleCrate;
 import io.bootique.config.ConfigurationFactory;
 import io.bootique.di.Binder;
 import io.bootique.di.Injector;
@@ -54,6 +55,14 @@ public class TapestryModule extends ConfigModule {
      */
     public static TapestryModuleExtender extend(Binder binder) {
         return new TapestryModuleExtender(binder);
+    }
+
+    @Override
+    public ModuleCrate crate() {
+        return ModuleCrate.of(this)
+                .description("Deprecated, can be replaced with 'bootique-tapestry58'.")
+                .config("tapestry", BQTapestryFilterFactory.class)
+                .build();
     }
 
     @Override
