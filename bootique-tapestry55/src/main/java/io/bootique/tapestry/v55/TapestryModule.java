@@ -20,7 +20,7 @@
 package io.bootique.tapestry.v55;
 
 import io.bootique.BQCoreModule;
-import io.bootique.ConfigModule;
+import io.bootique.BQModule;
 import io.bootique.ModuleCrate;
 import io.bootique.config.ConfigurationFactory;
 import io.bootique.di.Binder;
@@ -47,7 +47,9 @@ import java.util.logging.Level;
  * @deprecated in favor of 5.8 (or later) modules
  */
 @Deprecated(since = "3.0", forRemoval = true)
-public class TapestryModule extends ConfigModule {
+public class TapestryModule implements BQModule {
+
+    private static final String CONFIG_PREFIX = "tapestry";
 
     /**
      * @param binder DI binder passed to the Module that invokes this method.
@@ -61,7 +63,7 @@ public class TapestryModule extends ConfigModule {
     public ModuleCrate crate() {
         return ModuleCrate.of(this)
                 .description("Deprecated, can be replaced with 'bootique-tapestry58'.")
-                .config("tapestry", BQTapestryFilterFactory.class)
+                .config(CONFIG_PREFIX, BQTapestryFilterFactory.class)
                 .build();
     }
 
@@ -92,7 +94,7 @@ public class TapestryModule extends ConfigModule {
             @Symbols Map<String, String> diSymbols,
             @TapestryModuleBinding Set<Class<?>> moduleTypes) {
 
-        return config(BQTapestryFilterFactory.class, configFactory)
+        return configFactory.config(BQTapestryFilterFactory.class, CONFIG_PREFIX)
                 .createTapestryFilter(injector, diSymbols, moduleTypes);
     }
 }
