@@ -23,6 +23,8 @@ import io.bootique.annotation.BQConfig;
 import io.bootique.annotation.BQConfigProperty;
 import io.bootique.di.Injector;
 import io.bootique.jetty.MappedFilter;
+import io.bootique.tapestry.v58.annotation.Symbols;
+import io.bootique.tapestry.v58.annotation.TapestryModuleBinding;
 import io.bootique.tapestry.v58.di.InjectorModuleDef;
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.http.TapestryHttpSymbolConstants;
@@ -34,6 +36,7 @@ import org.apache.tapestry5.modules.TapestryModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
 import java.util.*;
 
 @BQConfig
@@ -41,20 +44,30 @@ public class BQTapestryFilterFactory {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BQTapestryFilterFactory.class);
 
+    private final Injector injector;
+    private final Map<String, String> diSymbols;
+    private final Set<Class<?>> customModules;
+
     protected String urlPattern;
     protected int filterOrder;
-
     protected String name;
-
     // properties from https://tapestry.apache.org/configuration.html
-
     protected Boolean productionMode;
     protected String executionModes;
     protected String supportedLocales;
     protected String charset;
     protected String appPackage;
 
-    public BQTapestryFilterFactory() {
+    @Inject
+    public BQTapestryFilterFactory(
+            Injector injector,
+            @Symbols Map<String, String> diSymbols,
+            @TapestryModuleBinding Set<Class<?>> customModules) {
+
+        this.injector = injector;
+        this.diSymbols = diSymbols;
+        this.customModules = customModules;
+
         this.urlPattern = "/*";
         this.filterOrder = 1;
         this.name = "tapestry";
@@ -104,7 +117,7 @@ public class BQTapestryFilterFactory {
         this.urlPattern = urlPattern;
     }
 
-    public MappedFilter<BQTapestryFilter> createTapestryFilter(Injector injector, Map<String, String> diSymbols, Set<Class<?>> customModules) {
+    public MappedFilter<BQTapestryFilter> create() {
 
         BQTapestryFilter filter = new BQTapestryFilter(
                 name,

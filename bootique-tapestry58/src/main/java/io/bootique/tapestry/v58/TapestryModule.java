@@ -24,14 +24,11 @@ import io.bootique.BQModule;
 import io.bootique.ModuleCrate;
 import io.bootique.config.ConfigurationFactory;
 import io.bootique.di.Binder;
-import io.bootique.di.Injector;
 import io.bootique.di.Provides;
 import io.bootique.di.TypeLiteral;
 import io.bootique.jetty.JettyModule;
 import io.bootique.jetty.MappedFilter;
 import io.bootique.jetty.servlet.ServletEnvironment;
-import io.bootique.tapestry.v58.annotation.Symbols;
-import io.bootique.tapestry.v58.annotation.TapestryModuleBinding;
 import io.bootique.tapestry.v58.di.BqTapestryModule;
 import io.bootique.tapestry.v58.env.TapestryEnvironment;
 import io.bootique.tapestry.v58.env.TapestryServletEnvironment;
@@ -39,8 +36,6 @@ import io.bootique.tapestry.v58.filter.BQTapestryFilter;
 import io.bootique.tapestry.v58.filter.BQTapestryFilterFactory;
 
 import javax.inject.Singleton;
-import java.util.Map;
-import java.util.Set;
 import java.util.logging.Level;
 
 public class TapestryModule implements BQModule {
@@ -66,7 +61,7 @@ public class TapestryModule implements BQModule {
     @Override
     public void configure(Binder binder) {
         TapestryModule.extend(binder).initAllExtensions().addTapestryModule(BqTapestryModule.class);
-        TypeLiteral<MappedFilter<BQTapestryFilter>> tf = new TypeLiteral<MappedFilter<BQTapestryFilter>>() {
+        TypeLiteral<MappedFilter<BQTapestryFilter>> tf = new TypeLiteral<>() {
         };
         JettyModule.extend(binder).addMappedFilter(tf);
 
@@ -84,13 +79,7 @@ public class TapestryModule implements BQModule {
 
     @Singleton
     @Provides
-    MappedFilter<BQTapestryFilter> createTapestryFilter(
-            ConfigurationFactory configFactory,
-            Injector injector,
-            @Symbols Map<String, String> diSymbols,
-            @TapestryModuleBinding Set<Class<?>> moduleTypes) {
-
-        return configFactory.config(BQTapestryFilterFactory.class, CONFIG_PREFIX)
-                .createTapestryFilter(injector, diSymbols, moduleTypes);
+    MappedFilter<BQTapestryFilter> createTapestryFilter(ConfigurationFactory configFactory) {
+        return configFactory.config(BQTapestryFilterFactory.class, CONFIG_PREFIX).create();
     }
 }
