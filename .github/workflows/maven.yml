@@ -7,11 +7,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
-    name: JDK ${{ matrix.java }}
-    continue-on-error: ${{ matrix.java == '17' || matrix.java == 21 }}
+    name: JDK ${{ matrix.java.bersion }}
     strategy:
       matrix:
-        java: [ 11, 17, 21 ]
+        java:
+          - version: 11
+          - version: 17
+            profile: '!legacy' # exclude T55 module
+          - version: 21
+            profile: '!legacy' # exclude T55 module
 
     steps:
       - name: Checkout...
@@ -20,7 +24,7 @@ jobs:
       - name: Set up JDK...
         uses: actions/setup-java@v1
         with:
-          java-version: ${{ matrix.java }}
+          java-version: ${{ matrix.java.version }}
 
       - name: Retrieve mvn repo cache...
         uses: actions/cache@v2

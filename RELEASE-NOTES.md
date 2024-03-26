@@ -1,6 +1,7 @@
 ## 3.0-M3
 
 * #26 Deprecate 5.5 / 5.6 modules
+* #27 Upgrade to 5.8.4 - support Java 21
 
 ## 3.0.M1
 
