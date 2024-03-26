@@ -7,15 +7,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
-    name: JDK ${{ matrix.java.bersion }}
+    name: JDK ${{ matrix.java }}
     strategy:
       matrix:
-        java:
-          - version: 11
-          - version: 17
-            profile: '!legacy' # exclude T55 module
-          - version: 21
-            profile: '!legacy' # exclude T55 module
+        java: [ 11, 17, 21 ]
+        include:
+          - java: 17
+            mvn-profile: '-P !legacy' # exclude T55 module
+          - java: 21
+            mvn-profile: '-P !legacy' # exclude T55 module
 
     steps:
       - name: Checkout...
@@ -24,7 +24,7 @@ jobs:
       - name: Set up JDK...
         uses: actions/setup-java@v1
         with:
-          java-version: ${{ matrix.java.version }}
+          java-version: ${{ matrix.java }}
 
       - name: Retrieve mvn repo cache...
         uses: actions/cache@v2
@@ -34,7 +34,7 @@ jobs:
           restore-keys: ${{ runner.os }}-maven
 
       - name: Build and test...
-        run: mvn clean verify
+        run: mvn clean verify ${{ matrix.mvn-profile }}
 
   deploy:
     needs: build
