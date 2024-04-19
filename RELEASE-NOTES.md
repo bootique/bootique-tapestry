@@ -1,3 +1,7 @@
+## 3.0-M4
+
+* #28 Upgrade to tapestry 5.8.6
+
 ## 3.0-M3
 
 * #26 Deprecate 5.5 / 5.6 modules
