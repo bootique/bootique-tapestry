@@ -44,7 +44,7 @@ import java.util.Set;
 import java.util.logging.Level;
 
 /**
- * @deprecated in favor of 5.8 (or later) modules
+ * @deprecated in favor of 5.9 Jakarta (or later) modules
  */
 @Deprecated(since = "3.0", forRemoval = true)
 public class TapestryModule implements BQModule {
@@ -62,7 +62,7 @@ public class TapestryModule implements BQModule {
     @Override
     public ModuleCrate crate() {
         return ModuleCrate.of(this)
-                .description("Deprecated, can be replaced with 'bootique-tapestry58'.")
+                .description("Deprecated, can be replaced with 'bootique-tapestry59-jakarta'.")
                 .config(CONFIG_PREFIX, BQTapestryFilterFactory.class)
                 .build();
     }

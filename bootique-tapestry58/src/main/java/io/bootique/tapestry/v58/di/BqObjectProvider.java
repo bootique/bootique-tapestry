@@ -27,6 +27,10 @@ import org.apache.tapestry5.commons.ObjectProvider;
 
 import java.lang.annotation.Annotation;
 
+/**
+ * @deprecated in favor of 5.9 Jakarta (or later) modules
+ */
+@Deprecated(since = "3.0", forRemoval = true)
 public class BqObjectProvider implements ObjectProvider {
 
     private Injector injector;

@@ -33,7 +33,7 @@ import java.util.Set;
 /**
  * A Tapestry DI Module that provides integration with Bootique DI.
  *
- * @deprecated in favor of 5.8 (or later) modules
+ * @deprecated in favor of 5.9 Jakarta (or later) modules
  */
 @Deprecated(since = "3.0", forRemoval = true)
 public class BqTapestryModule {

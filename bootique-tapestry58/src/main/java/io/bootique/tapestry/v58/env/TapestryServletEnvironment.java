@@ -25,6 +25,10 @@ import org.apache.tapestry5.ioc.Registry;
 
 import java.util.Optional;
 
+/**
+ * @deprecated in favor of 5.9 Jakarta (or later) modules
+ */
+@Deprecated(since = "3.0", forRemoval = true)
 public class TapestryServletEnvironment implements TapestryEnvironment {
 
     private ServletEnvironment servletEnvironment;

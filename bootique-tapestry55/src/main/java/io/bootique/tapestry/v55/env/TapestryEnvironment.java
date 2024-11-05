@@ -28,7 +28,7 @@ import java.util.Optional;
  * lookup Tapestry-specific services that otherwise can't be injected. Will throw an exception if the Tapestry subsystem
  * is not yet started, and its servlet filters are not yet initialized.
  *
- * @deprecated in favor of 5.8 (or later) modules
+ * @deprecated in favor of 5.9 Jakarta (or later) modules
  */
 @Deprecated(since = "3.0", forRemoval = true)
 public interface TapestryEnvironment {

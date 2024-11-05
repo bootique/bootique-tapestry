@@ -38,6 +38,10 @@ import io.bootique.tapestry.v58.filter.BQTapestryFilterFactory;
 import javax.inject.Singleton;
 import java.util.logging.Level;
 
+/**
+ * @deprecated in favor of 5.9 Jakarta (or later) modules
+ */
+@Deprecated(since = "3.0", forRemoval = true)
 public class TapestryModule implements BQModule {
 
     private static final String CONFIG_PREFIX = "tapestry";
@@ -53,7 +57,7 @@ public class TapestryModule implements BQModule {
     @Override
     public ModuleCrate crate() {
         return ModuleCrate.of(this)
-                .description("Integrates Apache Tapestry, v5.8")
+                .description("Deprecated, can be replaced with 'bootique-tapestry59-jakarta'.")
                 .config(CONFIG_PREFIX, BQTapestryFilterFactory.class)
                 .build();
     }

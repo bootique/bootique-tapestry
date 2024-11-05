@@ -46,7 +46,7 @@ import java.io.IOException;
 /**
  * A servlet filter that starts Tapestry environment. Based on Tapestry {@link org.apache.tapestry5.TapestryFilter}.
  *
- * @deprecated in favor of 5.8 (or later) modules
+ * @deprecated in favor of 5.9 Jakarta (or later) modules
  */
 @Deprecated(since = "3.0", forRemoval = true)
 // we couldn't subclass TapestryFilter as the interesting parts (init() method) are final and too coarse grained.

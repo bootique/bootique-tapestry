@@ -31,7 +31,7 @@ import io.bootique.tapestry.v55.annotation.TapestryModuleBinding;
 import org.apache.tapestry5.services.LibraryMapping;
 
 /**
- * @deprecated in favor of 5.8 (or later) modules
+ * @deprecated in favor of 5.9 Jakarta (or later) modules
  */
 @Deprecated(since = "3.0", forRemoval = true)
 public class TapestryModuleExtender extends ModuleExtender<TapestryModuleExtender> {

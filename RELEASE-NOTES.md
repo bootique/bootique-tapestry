@@ -1,3 +1,7 @@
+## 3.0-M5
+
+* #30 Deprecate Tapestry 5.8 integration module
+
 ## 3.0-M4
 
 * #28 Upgrade to tapestry 5.8.6

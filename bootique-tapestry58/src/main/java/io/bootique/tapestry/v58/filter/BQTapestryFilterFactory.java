@@ -39,6 +39,10 @@ import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
 import java.util.*;
 
+/**
+ * @deprecated in favor of 5.9 Jakarta (or later) modules
+ */
+@Deprecated(since = "3.0", forRemoval = true)
 @BQConfig
 public class BQTapestryFilterFactory {
 
