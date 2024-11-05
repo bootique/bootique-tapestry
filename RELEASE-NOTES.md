@@ -1,5 +1,6 @@
 ## 3.0-M5
 
+* #29 "bootique-tapestry59-jakarta" module
 * #30 Deprecate Tapestry 5.8 integration module
 
 ## 3.0-M4
