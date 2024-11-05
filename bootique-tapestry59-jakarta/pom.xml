@@ -30,7 +30,7 @@
 	<artifactId>bootique-tapestry59-jakarta</artifactId>
 	<packaging>jar</packaging>
 
-	<name>bootique-tapestry58: Apache Tapestry Jakarta 5.9.x Integration for Bootique</name>
+	<name>bootique-tapestry59: Apache Tapestry Jakarta 5.9.x Integration for Bootique</name>
 	<description>
 		Provides Apache Tapestry 5.9.x Jakarta integration with Bootique.
 	</description>
@@ -38,8 +38,19 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>io.bootique.jetty</groupId>
+				<artifactId>bootique-jetty-jakarta</artifactId>
+				<version>${bootique.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.bootique.jetty</groupId>
+				<artifactId>bootique-jetty-jakarta-junit5</artifactId>
+				<version>${bootique.version}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>org.apache.tapestry</groupId>
-				<artifactId>tapestry-core</artifactId>
+				<artifactId>tapestry-core-jakarta</artifactId>
 				<version>${tapestry59.version}</version>
 				<exclusions>
 					<exclusion>
@@ -77,11 +88,11 @@
 		</dependency>
 		<dependency>
 			<groupId>io.bootique.jetty</groupId>
-			<artifactId>bootique-jetty</artifactId>
+			<artifactId>bootique-jetty-jakarta</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
-			<artifactId>tapestry-core</artifactId>
+			<artifactId>tapestry-core-jakarta</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.woodstox</groupId>
@@ -109,8 +120,8 @@
 		</dependency>
 		<dependency>
 			<groupId>io.bootique.jetty</groupId>
-			<artifactId>bootique-jetty-junit5</artifactId>
-			<version>${bootique.version}</version>
+			<artifactId>bootique-jetty-jakarta-junit5</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

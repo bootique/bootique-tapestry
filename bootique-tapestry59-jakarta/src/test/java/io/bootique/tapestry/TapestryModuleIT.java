@@ -26,11 +26,10 @@ import io.bootique.junit5.BQTestFactory;
 import io.bootique.junit5.BQTestTool;
 import io.bootique.tapestry.v59.TapestryModule;
 import io.bootique.tapestry.v59.testapp2.bq.TestApp2BootiqueModule;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.apache.tapestry5.services.LibraryMapping;
 import org.junit.jupiter.api.Test;
-
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

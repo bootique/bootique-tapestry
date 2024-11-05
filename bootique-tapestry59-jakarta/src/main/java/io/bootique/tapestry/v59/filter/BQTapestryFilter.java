@@ -19,6 +19,9 @@
 
 package io.bootique.tapestry.v59.filter;
 
+import jakarta.servlet.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.tapestry5.TapestryFilter;
 import org.apache.tapestry5.http.AsyncRequestHandlerResponse;
 import org.apache.tapestry5.http.TapestryHttpSymbolConstants;
@@ -34,9 +37,6 @@ import org.apache.tapestry5.ioc.services.SymbolProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
