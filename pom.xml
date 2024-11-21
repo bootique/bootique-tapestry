@@ -38,8 +38,6 @@
 	</description>
 
 	<properties>
-		<bootique.version>${project.version}</bootique.version>
-
 		<!-- Confusion alert: Due to Tapestry versioning scheme, 5.5 and 5.6 are compatible,
 		while 5.7+ is a new thing. So "bootique-tapestry55" module is now based on Tapestry 5.6.x -->
 		<tapestry55.version>5.6.4</tapestry55.version>
@@ -64,17 +62,17 @@
 			<dependency>
 				<groupId>io.bootique</groupId>
 				<artifactId>bootique</artifactId>
-				<version>${bootique.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>io.bootique.jetty</groupId>
 				<artifactId>bootique-jetty</artifactId>
-				<version>${bootique.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>io.bootique.jetty</groupId>
 				<artifactId>bootique-jetty-junit5</artifactId>
-				<version>${bootique.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.mockito</groupId>
