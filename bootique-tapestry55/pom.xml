@@ -48,6 +48,11 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+			<dependency>
+				<groupId>io.bootique.jetty</groupId>
+				<artifactId>bootique-jetty-junit5</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -84,7 +89,7 @@
 		<dependency>
 			<groupId>io.bootique.jetty</groupId>
 			<artifactId>bootique-jetty-junit5</artifactId>
-			<version>${project.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

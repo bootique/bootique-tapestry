@@ -1,3 +1,7 @@
+## 3.0-RC1
+
+* #34 Tapestry 5.5 and 5.8 modules bring JUnit 5 to compile scope
+
 ## 3.0-M6
 
 * #29 "bootique-tapestry59-jakarta" module
