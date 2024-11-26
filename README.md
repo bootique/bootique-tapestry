@@ -41,11 +41,9 @@ Add the module to your Bootique app:
     </dependencies>
 </dependencyManagement>
 ...
-<!-- Note that "bootique-tapestry" module bundles older Tapestry 5.4. 
-     We recommend using "bootique-tapestry55" -->
 <dependency>
     <groupId>io.bootique.tapestry</groupId>
-    <artifactId>bootique-tapestry55</artifactId>
+    <artifactId>bootique-tapestry58</artifactId>
 </dependency>
 ```
 
@@ -56,5 +54,5 @@ tapestry:
   appPackage: com.foo  # default base package for the Tapestry app
 ```
 
-Tapestry app can use its own injection and modules. Additionally services defined in Bootique are available via Tapestry 
+Tapestry app can use its own injection and modules. Additionally, services defined in Bootique are available via Tapestry 
 injection.
