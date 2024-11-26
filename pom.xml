@@ -47,6 +47,7 @@
 		<!-- Dependency versions compatible with the rest of Bootique, and manually managed for security reasons -->
 		<!-- Liquibase uses these -->
 		<commons.lang3.version>3.17.0</commons.lang3.version>
+		<commons.io.version>2.17.0</commons.io.version>
 		<!-- Security considerations, 5.8 and 5.9 only -->
 		<commons.codec.version>1.16.1</commons.codec.version>
 	</properties>
@@ -104,6 +105,11 @@
 				<groupId>commons-codec</groupId>
 				<artifactId>commons-codec</artifactId>
 				<version>${commons.codec.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons.io.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
