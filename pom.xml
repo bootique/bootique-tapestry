@@ -44,9 +44,11 @@
 		<tapestry58.version>5.8.6</tapestry58.version>
 		<tapestry59.version>5.9.0-preview-2</tapestry59.version>
 
-		<!-- Dependency versions compatible with the rest of Bootique -->
+		<!-- Dependency versions compatible with the rest of Bootique, and manually managed for security reasons -->
 		<!-- Liquibase uses these -->
 		<commons.lang3.version>3.17.0</commons.lang3.version>
+		<!-- Security considerations, 5.8 and 5.9 only -->
+		<commons.codec.version>1.16.1</commons.codec.version>
 	</properties>
 
 	<modules>
@@ -97,6 +99,11 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
 				<version>${commons.lang3.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>${commons.codec.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
