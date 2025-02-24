@@ -42,7 +42,7 @@
 		while 5.7+ is a new thing. So "bootique-tapestry55" module is now based on Tapestry 5.6.x -->
 		<tapestry55.version>5.6.4</tapestry55.version>
 		<tapestry58.version>5.8.6</tapestry58.version>
-		<tapestry59.version>5.9.0-preview-2</tapestry59.version>
+		<tapestry59.version>5.9.0</tapestry59.version>
 
 		<!-- Dependency versions compatible with the rest of Bootique, and manually managed for security reasons -->
 		<!-- Liquibase uses these -->

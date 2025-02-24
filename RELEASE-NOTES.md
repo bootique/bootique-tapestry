@@ -4,6 +4,7 @@
 * #32 commons-io version is incompatible with Liquibase
 * #33 "jakarta.xml.bind-api" version is incompatible with Jersey
 * #34 Tapestry 5.5 and 5.8 modules bring JUnit 5 to compile scope
+* #35 Upgrade to Tapestry 5.9.0
 
 ## 3.0-M6
 
