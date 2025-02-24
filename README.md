@@ -43,7 +43,7 @@ Add the module to your Bootique app:
 ...
 <dependency>
     <groupId>io.bootique.tapestry</groupId>
-    <artifactId>bootique-tapestry58</artifactId>
+    <artifactId>bootique-tapestry59-jakarta</artifactId>
 </dependency>
 ```
 
