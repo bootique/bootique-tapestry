@@ -3,5 +3,6 @@
 <head><title>Index</title></head>
 <body>
 <t:outputraw value="property"/>
+<t:outputraw value="injectionAssert"/>
 </body>
 </html>

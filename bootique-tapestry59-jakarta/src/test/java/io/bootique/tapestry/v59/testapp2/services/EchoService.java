@@ -19,9 +19,14 @@
 
 package io.bootique.tapestry.v59.testapp2.services;
 
+import java.security.SecureRandom;
+
 public class EchoService {
 
+    private final int seed = new SecureRandom().nextInt(100000);
+
     public String get(String in) {
-        return "[" + in + "]";
+        // adding seed allows to distinguish between EchoService instances and test for singletons
+        return seed + "[" + in + "]";
     }
 }

@@ -20,14 +20,28 @@
 package io.bootique.tapestry.v59.testapp2.pages;
 
 import io.bootique.tapestry.v59.testapp2.services.EchoService;
-import org.apache.tapestry5.ioc.annotations.Inject;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class Index {
 
-    @Inject
-    private EchoService echoService;
+    @org.apache.tapestry5.ioc.annotations.Inject
+    private EchoService s1;
+
+    @jakarta.inject.Inject
+    private EchoService s2;
 
     public String getProperty() {
-        return echoService.get("III");
+        return s1.get("III");
+    }
+
+    public String getInjectionAssert() {
+        assertNotNull(s1);
+        assertNotNull(s2);
+
+        assertEquals(s1.get(""), s2.get(""));
+
+        return "expected injection state";
     }
 }
