@@ -35,7 +35,7 @@ import io.bootique.tapestry.v59.env.TapestryServletEnvironment;
 import io.bootique.tapestry.v59.filter.BQTapestryFilter;
 import io.bootique.tapestry.v59.filter.BQTapestryFilterFactory;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 import java.util.logging.Level;
 
 public class TapestryModule implements BQModule {

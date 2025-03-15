@@ -38,7 +38,7 @@ import io.bootique.tapestry.v55.env.TapestryServletEnvironment;
 import io.bootique.tapestry.v55.filter.BQTapestryFilter;
 import io.bootique.tapestry.v55.filter.BQTapestryFilterFactory;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
