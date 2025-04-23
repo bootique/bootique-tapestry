@@ -27,7 +27,7 @@
 		<version>4.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>bootique-tapestry59-jakarta</artifactId>
+	<artifactId>bootique-tapestry59</artifactId>
 	<packaging>jar</packaging>
 
 	<name>bootique-tapestry59: Apache Tapestry Jakarta 5.9.x Integration for Bootique</name>
