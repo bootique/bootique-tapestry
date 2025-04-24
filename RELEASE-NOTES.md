@@ -1,3 +1,7 @@
+## 4.0-M1
+
+* #36 Remove deprecated modules and APIs
+
 ## 3.0-RC1
 
 * #31 commons-lang3 version is incompatible with Liquibase

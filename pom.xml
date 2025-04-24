@@ -37,11 +37,7 @@
 		Provides Apache Tapestry Integration with Bootique.
 	</description>
 
-	<properties>
-		<!-- Confusion alert: Due to Tapestry versioning scheme, 5.5 and 5.6 are compatible,
-		while 5.7+ is a new thing. So "bootique-tapestry55" module is now based on Tapestry 5.6.x -->
-		<tapestry55.version>5.6.4</tapestry55.version>
-		<tapestry58.version>5.8.6</tapestry58.version>
+	<properties>	
 		<tapestry59.version>5.9.0</tapestry59.version>
 
 		<!-- Dependency versions compatible with the rest of Bootique, and manually managed for security reasons -->
@@ -57,9 +53,7 @@
 	</properties>
 
 	<modules>
-		<!-- "bootique-tapestry55" module is included via a profile below -->
-		<module>bootique-tapestry58</module>
-		<module>bootique-tapestry59-jakarta</module>
+		<module>bootique-tapestry59</module>
 	</modules>
 
 	<scm>
@@ -124,15 +118,6 @@
 	</dependencyManagement>
 
 	<profiles>
-		<profile>
-			<id>legacy</id>
-			<modules>
-				<module>bootique-tapestry55</module>
-			</modules>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-		</profile>
 		<profile>
 			<id>rat</id>
 			<build>
