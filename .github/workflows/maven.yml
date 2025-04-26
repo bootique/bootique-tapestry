@@ -10,7 +10,8 @@ jobs:
     name: JDK ${{ matrix.java }}
     strategy:
       matrix:
-        java: [ 21, 24 ]
+        # TODO: no Java 24 support yet
+        java: [ 21 ]
 
     steps:
       - name: Checkout...
