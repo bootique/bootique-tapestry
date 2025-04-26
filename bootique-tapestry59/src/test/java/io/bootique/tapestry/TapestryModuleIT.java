@@ -20,6 +20,7 @@
 package io.bootique.tapestry;
 
 import io.bootique.jetty.JettyModule;
+import io.bootique.jetty.MappedServlet;
 import io.bootique.jetty.junit5.JettyTester;
 import io.bootique.junit5.BQTest;
 import io.bootique.junit5.BQTestFactory;
@@ -116,7 +117,7 @@ public class TapestryModuleIT {
                 .module(jetty.moduleReplacingConnectors())
                 .module(b -> {
                     TapestryModule.extend(b).addIgnoredPath("/ignored_by_tapestry/*");
-                    JettyModule.extend(b).useDefaultServlet();
+                    JettyModule.extend(b).addMappedServlet(MappedServlet.ofStatic("/").name("default").build());
                 })
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.v59.testapp1")
                 .property("bq.jetty.staticResourceBase", "classpath:docroot")
