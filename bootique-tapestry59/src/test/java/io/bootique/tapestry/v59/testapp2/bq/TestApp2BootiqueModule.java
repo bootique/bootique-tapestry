@@ -20,7 +20,7 @@
 package io.bootique.tapestry.v59.testapp2.bq;
 
 import io.bootique.di.Binder;
-import io.bootique.di.BQModule;
+import io.bootique.BQModule;
 
 public class TestApp2BootiqueModule implements BQModule {
 
