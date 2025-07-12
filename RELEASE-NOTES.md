@@ -2,6 +2,10 @@
 
 * #36 Remove deprecated modules and APIs
 
+## 3.0-RC2
+
+* #38 Bump org.apache.commons:commons-lang3 from 3.17.0 to 3.18.0
+
 ## 3.0-RC1
 
 * #31 commons-lang3 version is incompatible with Liquibase
