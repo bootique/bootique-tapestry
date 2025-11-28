@@ -39,14 +39,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TapestryModuleIT {
 
     @BQTestTool
-    final BQTestFactory app = new BQTestFactory().autoLoadModules();
+    final BQTestFactory testFactory = new BQTestFactory().autoLoadModules();
 
     @BQTestTool
     final JettyTester jetty = JettyTester.create();
 
     @Test
     public void pageRender_Index() {
-        app.app("-s")
+        testFactory.app("-s")
                 .module(jetty.moduleReplacingConnectors())
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.v59.testapp1")
                 .run();
@@ -56,7 +56,7 @@ public class TapestryModuleIT {
 
     @Test
     public void pageRender_Page2() {
-        app.app("-s")
+        testFactory.app("-s")
                 .module(jetty.moduleReplacingConnectors())
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.v59.testapp1")
                 .run();
@@ -66,7 +66,7 @@ public class TapestryModuleIT {
 
     @Test
     public void pageRender_T5_Injection() {
-        app.app("-s")
+        testFactory.app("-s")
                 .module(jetty.moduleReplacingConnectors())
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.v59.testapp2")
                 .property("bq.tapestry.name", "testapp2")
@@ -77,7 +77,7 @@ public class TapestryModuleIT {
 
     @Test
     public void pageRender_T5_BQInjection() {
-        app.app("-s")
+        testFactory.app("-s")
                 .module(jetty.moduleReplacingConnectors())
                 .modules(TestApp2BootiqueModule.class)
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.v59.testapp2")
@@ -89,7 +89,7 @@ public class TapestryModuleIT {
 
     @Test
     public void pageRender_T5_BQInjection_Annotations() {
-        app.app("-s", "testarg", "testarg2")
+        testFactory.app("-s", "testarg", "testarg2")
                 .module(jetty.moduleReplacingConnectors())
                 .modules(TestApp2BootiqueModule.class)
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.v59.testapp2")
@@ -101,7 +101,7 @@ public class TapestryModuleIT {
 
     @Test
     public void pageRender_LibComponent() {
-        app.app("-s")
+        testFactory.app("-s")
                 .module(jetty.moduleReplacingConnectors())
                 .module(b -> TapestryModule.extend(b)
                         .addLibraryMapping(new LibraryMapping("lib", "io.bootique.tapestry.v59.testlib1")))
@@ -113,7 +113,7 @@ public class TapestryModuleIT {
 
     @Test
     public void ignorePaths() {
-        app.app("-s")
+        testFactory.app("-s")
                 .module(jetty.moduleReplacingConnectors())
                 .module(b -> {
                     TapestryModule.extend(b).addIgnoredPath("/ignored_by_tapestry/*");
@@ -129,7 +129,7 @@ public class TapestryModuleIT {
 
     @Test
     public void pageRender_T5Modules() {
-        app.app("-s")
+        testFactory.app("-s")
                 .module(jetty.moduleReplacingConnectors())
                 .module(b -> TapestryModule.extend(b).addTapestryModule(TestApp3Module.class))
                 .property("bq.tapestry.appPackage", "io.bootique.tapestry.v59.testapp3")
