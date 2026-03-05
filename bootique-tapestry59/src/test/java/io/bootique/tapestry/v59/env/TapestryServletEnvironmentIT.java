@@ -20,10 +20,9 @@
 package io.bootique.tapestry.v59.env;
 
 import io.bootique.BQRuntime;
-import io.bootique.junit5.BQTest;
-import io.bootique.junit5.BQTestFactory;
-import io.bootique.junit5.BQTestTool;
-import io.bootique.tapestry.v59.env.TapestryEnvironment;
+import io.bootique.junit.BQTest;
+import io.bootique.junit.BQTestFactory;
+import io.bootique.junit.BQTestTool;
 import org.apache.tapestry5.ioc.Registry;
 import org.apache.tapestry5.services.ComponentClassResolver;
 import org.junit.jupiter.api.Test;

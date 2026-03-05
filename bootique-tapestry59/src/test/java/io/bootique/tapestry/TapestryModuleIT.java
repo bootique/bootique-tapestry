@@ -21,10 +21,10 @@ package io.bootique.tapestry;
 
 import io.bootique.jetty.JettyModule;
 import io.bootique.jetty.MappedServlet;
-import io.bootique.jetty.junit5.JettyTester;
-import io.bootique.junit5.BQTest;
-import io.bootique.junit5.BQTestFactory;
-import io.bootique.junit5.BQTestTool;
+import io.bootique.jetty.junit.JettyTester;
+import io.bootique.junit.BQTest;
+import io.bootique.junit.BQTestFactory;
+import io.bootique.junit.BQTestTool;
 import io.bootique.tapestry.v59.TapestryModule;
 import io.bootique.tapestry.v59.testapp2.bq.TestApp2BootiqueModule;
 import jakarta.ws.rs.core.MediaType;
