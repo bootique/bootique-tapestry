@@ -18,7 +18,7 @@
   -->
 
 [![build test deploy](https://github.com/bootique/bootique-tapestry/actions/workflows/maven.yml/badge.svg)](https://github.com/bootique/bootique-tapestry/actions/workflows/maven.yml)
-[![Maven Central](https://img.shields.io/maven-central/v/io.bootique.tapestry/bootique-tapestry.svg?colorB=brightgreen)](https://search.maven.org/artifact/io.bootique.tapestry/bootique-tapestry/)
+[![Maven Central](https://img.shields.io/maven-central/v/io.bootique.tapestry/bootique-tapestry-parent.svg?colorB=brightgreen)](https://search.maven.org/artifact/io.bootique.tapestry/bootique-tapestry-parent/)
 
 # bootique-tapestry
 Provides [Apache Tapestry](http://tapestry.apache.org/) integration with [Bootique](http://bootique.io).
