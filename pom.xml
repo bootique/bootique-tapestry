@@ -38,7 +38,7 @@
 	</description>
 
 	<properties>	
-		<tapestry59.version>5.9.0</tapestry59.version>
+		<tapestry59.version>5.9.1</tapestry59.version>
 
 		<!-- Dependency versions compatible with the rest of Bootique, and manually managed for security reasons -->
 		<!-- Liquibase uses these -->

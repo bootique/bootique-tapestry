@@ -1,3 +1,7 @@
+## 4.0-M6
+
+* #39 Upgrade to 5.9.1
+
 ## 4.0-M1
 
 * #36 Remove deprecated modules and APIs
