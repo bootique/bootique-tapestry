@@ -66,6 +66,10 @@
 						<artifactId>commons-lang3</artifactId>
 					</exclusion>
 					<exclusion>
+						<groupId>jakarta.annotation</groupId>
+						<artifactId>*</artifactId>
+					</exclusion>
+					<exclusion>
 						<groupId>commons-io</groupId>
 						<artifactId>commons-io</artifactId>
 					</exclusion>
@@ -91,6 +95,11 @@
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
 			<artifactId>tapestry-core-jakarta</artifactId>
+		</dependency>
+		<!-- Excluded above, so it must be re-added: Tapestry IoC uses @PostConstruct etc. -->
+		<dependency>
+			<groupId>jakarta.annotation</groupId>
+			<artifactId>jakarta.annotation-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>
