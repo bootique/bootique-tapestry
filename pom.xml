@@ -44,9 +44,7 @@
 		<!-- Liquibase uses these -->
 		<commons.lang3.version>3.20.0</commons.lang3.version>
 		<commons.io.version>2.21.0</commons.io.version>
-
-		<!-- Security considerations, 5.8 and 5.9 only -->
-		<commons.codec.version>1.16.1</commons.codec.version>
+		<commons.codec.version>1.19.0</commons.codec.version>
 	</properties>
 
 	<modules>
